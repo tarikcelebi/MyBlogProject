@@ -23,4 +23,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration" Version="6.0.16" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyBlogDAL\MyBlogDAL.csproj" />
+    <ProjectReference Include="..\MyBlogDomain\MyBlogDomain.csproj" />
+  </ItemGroup>
+
 </Project>
