@@ -12,8 +12,8 @@ using MyBlogDAL.Context;
 namespace MyBlogDAL.Migrations
 {
     [DbContext(typeof(MyBlogDbContext))]
-    [Migration("20240127152914_MyBlogDB")]
-    partial class MyBlogDB
+    [Migration("20240202170838_MyBlogDB3")]
+    partial class MyBlogDB3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,14 +69,14 @@ namespace MyBlogDAL.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "47415a39-f97a-42ab-b50d-51ffacc5adbd",
+                            ConcurrencyStamp = "5f67fc2a-8d56-47ff-974c-4c87b07f9c6a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd3262",
-                            ConcurrencyStamp = "d31a3688-2209-4cb0-8531-88f04c33e815",
+                            ConcurrencyStamp = "edc30687-b85d-438f-922d-9a0db35417a6",
                             Name = "StandartUser",
                             NormalizedName = "STRANDARTUSER"
                         });
@@ -276,13 +276,15 @@ namespace MyBlogDAL.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "1541f76d-47b5-4592-bd88-9ae9d3e5c1af",
+                            ConcurrencyStamp = "8bb17a45-2fb8-48ef-9444-7117564031c9",
                             Email = "tarikcelebi97@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Tarık",
                             LastName = "Çelebi",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAECFdObpOkHaWeYeoy/W8pOWpwv5E9hJW2FdpjJ/o5LYtMdj/CP0xhSZE1dh+XbMylg==",
+                            NormalizedEmail = "TARIKCELEBI97@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPv7J8IhL84rhuUBYVTb5+P2AnG2/HkMQZuKeO9Y8KX5EUdSwEQq/9NEWDXIXzAUNg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

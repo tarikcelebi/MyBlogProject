@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyBlogDAL.Migrations
 {
-    public partial class MyBlogDB : Migration
+    public partial class MyBlogDB3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -247,17 +247,17 @@ namespace MyBlogDAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd3262", "d31a3688-2209-4cb0-8531-88f04c33e815", "StandartUser", "STRANDARTUSER" });
+                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd3262", "edc30687-b85d-438f-922d-9a0db35417a6", "StandartUser", "STRANDARTUSER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7210", "47415a39-f97a-42ab-b50d-51ffacc5adbd", "Admin", "ADMIN" });
+                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7210", "5f67fc2a-8d56-47ff-974c-4c87b07f9c6a", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, 0, "1541f76d-47b5-4592-bd88-9ae9d3e5c1af", "tarikcelebi97@gmail.com", true, "Tarık", "Çelebi", false, null, null, null, "AQAAAAEAACcQAAAAECFdObpOkHaWeYeoy/W8pOWpwv5E9hJW2FdpjJ/o5LYtMdj/CP0xhSZE1dh+XbMylg==", null, false, "", false, "Admin" });
+                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, 0, "8bb17a45-2fb8-48ef-9444-7117564031c9", "tarikcelebi97@gmail.com", true, "Tarık", "Çelebi", false, null, "TARIKCELEBI97@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEPv7J8IhL84rhuUBYVTb5+P2AnG2/HkMQZuKeO9Y8KX5EUdSwEQq/9NEWDXIXzAUNg==", null, false, "", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

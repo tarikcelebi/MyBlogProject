@@ -14,11 +14,9 @@ namespace MyBlogDAL.Context
     public class MyBlogDbContext : IdentityDbContext<AppUser>
     {
 
-        private readonly DbContextOptions<MyBlogDbContext> dbContext;
-
         public MyBlogDbContext(DbContextOptions<MyBlogDbContext> dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
+
         }
 
         public DbSet<Article> Articles { get; set; }
@@ -28,7 +26,6 @@ namespace MyBlogDAL.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
 
             base.OnModelCreating(builder);
 
@@ -57,7 +54,9 @@ namespace MyBlogDAL.Context
                     UserName = "Admin",
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "Qwe_123."),
-                    SecurityStamp = string.Empty
+                    SecurityStamp = string.Empty,
+                    NormalizedEmail = "tarikcelebi97@gmail.com".ToUpper(),
+                    NormalizedUserName = "Admin".ToUpper()
                 }
                 );
             builder.Entity<IdentityUserRole<string>>().HasData(

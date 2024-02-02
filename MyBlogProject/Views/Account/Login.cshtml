@@ -1,0 +1,20 @@
+﻿@using MyBlogProject.Models.AccountVMs
+@model LoginVM
+
+@{
+    ViewData["Title"]="Login page";
+}
+
+<form class="form-control" asp-action="Login" method="post">
+    <input type="hidden" asp-for="ReturnUrl" />
+
+    <div class="form-control">
+        <label asp-for="Email">E-Mail</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-control">
+        <label asp-for="Password">E-Mail</label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+        <button type="submit" class="btn btn-outline-success">Log In</button>
+</form>

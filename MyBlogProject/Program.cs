@@ -8,11 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<MyBlogDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
+builder.Services.AddDbContext<MyBlogDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")), ServiceLifetime.Scoped);
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MyBlogDbContext>();
 
-
+builder.Services.AddScoped<UserManager<AppUser>>();
+builder.Services.AddScoped<SignInManager<AppUser>>();
+//builder.Services.AddScoped<PasswordHasher<AppUser>>();
 
 var app = builder.Build();
 
