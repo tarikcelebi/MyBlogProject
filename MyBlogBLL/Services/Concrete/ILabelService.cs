@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlogDAL.Repositories.Abstract
+namespace MyBlogBLL.Services.Concrete
 {
-    public interface IArticleRepository : IRepository<Article>
+    public interface ILabelService
     {
-
+        Task<IEnumerable<Label>> GetAllLabels();
     }
 }

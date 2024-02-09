@@ -1,4 +1,5 @@
-﻿using MyBlogDomain.Entities;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using MyBlogDomain.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyBlogProject.Models.AccountVMs
@@ -13,7 +14,9 @@ namespace MyBlogProject.Models.AccountVMs
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public string CheckPassword { get; set; }
         public int Age { get; set; }
-        public List<Subject> Subjects { get; set; }
+        public Task<IEnumerable<SelectListItem>> Subjects { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MyBlogDAL.Context;
+using MyBlogDAL.Identity;
 using MyBlogDAL.Repositories.Abstract;
 using MyBlogDomain.Entities;
 using System;
@@ -15,5 +16,8 @@ namespace MyBlogDAL.Repositories.Concrete
         {
 
         }
+
+        private MyBlogDbContext myBlogDbContext => Context as MyBlogDbContext;
+
     }
 }

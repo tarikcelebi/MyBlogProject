@@ -1,4 +1,5 @@
-﻿using MyBlogDAL.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using MyBlogDAL.Context;
 using MyBlogDAL.Repositories.Abstract;
 using MyBlogDomain.Entities;
 using System;
@@ -11,13 +12,9 @@ namespace MyBlogDAL.Repositories.Concrete
 {
     public class SubjectRepository : GenericRepository<Subject>, ISubjectRepository
     {
-
-
-        public SubjectRepository(MyBlogDbContext dbContext) : base(dbContext)
+        public SubjectRepository(DbContext Context) : base(Context)
         {
 
         }
-
-
     }
 }

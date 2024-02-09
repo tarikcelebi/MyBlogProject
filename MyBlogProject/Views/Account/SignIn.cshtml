@@ -4,5 +4,52 @@
     ViewData["Title"] = "Sign In Page";
 }
 
+<form class="form-control" asp-action="SignIn" method="post">
+    <div class="form-control">
+        <label asp-for="FirstName"><h1>First Name</h1></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <br />
+    <div class="form-control">
+        <label asp-for="LastName"><h1>Last Name</h1></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <br />
+    <div class="form-control">
+        <label asp-for="Age"><h1>Age</h1></label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+    <br />
+    <div class="form-control">
+        <label asp-for="Email"><h1>E-Mail</h1></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <br />
+    <div class="form-control">
+        <label asp-for="Password"><h1>Password</h1></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+    <br />
+    <div class="form-control">
+        <label asp-for="CheckPassword"><h1>Re-Enter Password</h1></label>
+        <input asp-for="CheckPassword" class="form-control" />
+    </div>
+    <br />
+    <div class="form-control">
+            <select name="SubjectIds" asp-items="@await Model.Subjects" multiple="multiple" class="listbox"></select>
+    </div>
+    <button type="submit" class="btn btn-success"><h1>Sign In</h1></button>
+</form>
 
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.listbox').multiselect({
+            includeSelectOption: true
+        });
+    });
+
+</script>
 

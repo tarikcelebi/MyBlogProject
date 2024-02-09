@@ -23,6 +23,10 @@ namespace MyBlogDAL.Context
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<MyBlogDomain.Entities.Label> Labels { get; set; }
 
+        internal static void AddBaseOptions(DbContextOptionsBuilder<MyBlogDbContext> dbContextOptionsBuilder, string connectionString)
+        {
+            throw new NotImplementedException();
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

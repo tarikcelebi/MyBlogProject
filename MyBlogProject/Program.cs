@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MyBlogDAL.Context;
+using MyBlogBLL.Services.Abstract;
+using MyBlogDAL.Identity;
+using MyBlogDAL.Repositories.Abstract;
+using MyBlogDAL.Repositories.Concrete;
 using MyBlogDomain.Entities;
 using System;
 
@@ -8,9 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<MyBlogDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")), ServiceLifetime.Scoped);
+builder.Services.AddDbContext<MyBlogDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("connectionString"),
+        sqlServerOptionsAction: sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure();
+        });
+});
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MyBlogDbContext>();
+
+
+
+builder.Services.AddTransient<ISubjectRepository, SubjectRepository>();
+
+builder.Services.AddScoped<SubjectService>();
+
 
 builder.Services.AddScoped<UserManager<AppUser>>();
 builder.Services.AddScoped<SignInManager<AppUser>>();

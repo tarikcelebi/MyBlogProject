@@ -9,5 +9,6 @@ namespace MyBlogDAL.Repositories.Abstract
 {
     public interface ISubjectRepository : IRepository<Subject>
     {
+
     }
 }

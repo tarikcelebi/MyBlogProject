@@ -6,16 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlogBLL.Services
+namespace MyBlogBLL.Services.Abstract
 {
     public class UserService
     {
-        private readonly UserManager<AppUser> user;
 
-        public UserService(UserManager<AppUser> user)
-        {
-            this.user = user;
-        }
 
     }
 }

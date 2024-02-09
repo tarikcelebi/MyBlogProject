@@ -1,4 +1,7 @@
-﻿using MyBlogDAL.Context;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MyBlogDAL.Context
+using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using MyBlogDAL.Repositories.Abstract;
 using MyBlogDomain.Entities;
 using System;
@@ -10,61 +13,59 @@ using System.Threading.Tasks;
 
 namespace MyBlogDAL.Repositories.Concrete
 {
-    public class GenericRepository<T> : IRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : IRepository<T> where T : class
     {
-        private readonly MyBlogDbContext dbContext;
+        
+        protected readonly IdentityDbContext Context;
 
-        public GenericRepository(MyBlogDbContext dbContext)
+        public GenericRepository(IdentityDbContext Context)
         {
-            this.dbContext = dbContext;
+            this.Context = Context;
         }
 
-        public bool Add(T entity)
+        public async Task AddAsync(T entity)
         {
-            dbContext.Set<T>().Add(entity);
-            if (dbContext.SaveChanges() > 0)
-                return true;
-            else
-                return false;
-
+            await Context.Set<T>().AddAsync(entity);
         }
 
-        public bool Delete(T entity)
+        public async Task AddRangeAsync(IEnumerable<T> entities)
         {
-            dbContext.Set<T>().Remove(entity);
-            if (dbContext.SaveChanges() > 0)
-                return true;
-            else
-                return false;
+            await Context.Set<T>().AddRangeAsync(entities);
         }
 
-        public T FirstOrDefault(Expression<Func<T, bool>> expression)
+        public void Delete(T entity)
         {
-            return dbContext.Set<T>().FirstOrDefault(expression);
+            Context.Set<T>().Remove(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public void DeleteRange(IEnumerable<T> entities)
         {
-            return dbContext.Set<T>().ToList();
+            Context.Set<T>().RemoveRange(entities);
         }
 
-        public T GetById(int id)
+        public IEnumerable<T> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return dbContext.Set<T>().Find(id);
+            return Context.Set<T>().Where(predicate);
         }
 
-        public IEnumerable<T> GetWhereList(Expression<Func<T, bool>> expression)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return dbContext.Set<T>().Where(expression);
+            return await Context.Set<T>().ToListAsync();
         }
 
-        public bool Update(T entity)
+        public ValueTask<T> GetByIdASync(int id)
         {
-            dbContext.Set<T>().Update(entity);
-            if (dbContext.SaveChanges() > 0)
-                return true;
-            else
-                return false;
+            return Context.Set<T>().FindAsync(id);
+        }
+
+        public async Task<IEnumerable<T>> GetWhereListAsync(Expression<Func<T, bool>> expression)
+        {
+            return await Context.Set<T>().Where(expression).ToListAsync();
+        }
+
+        public async Task<T> SingleorDefault(Expression<Func<T, bool>> expression)
+        {
+            return await Context.Set<T>().SingleOrDefaultAsync(expression);
         }
     }
 }

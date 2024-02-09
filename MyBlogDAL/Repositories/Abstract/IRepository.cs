@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace MyBlogDAL.Repositories.Abstract
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T : class
     {
-        bool Add(T entity);
-        bool Update(T entity);
-        bool Delete(T entity);
-        T GetById(int id);
-        IEnumerable<T> GetAll();
-        T FirstOrDefault(Expression<Func<T, bool>> expression);
-        IEnumerable<T> GetWhereList(Expression<Func<T, bool>> expression);
+        ValueTask<T> GetByIdASync(int id);
+        Task AddAsync(T entity);
+        void Delete(T entity);
+        void DeleteRange(IEnumerable<T> entities);
+        Task AddRangeAsync(IEnumerable<T> entities);
+        IEnumerable<T> FindAsync(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> SingleorDefault(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> GetWhereListAsync(Expression<Func<T, bool>> expression);
         
     }
 }
