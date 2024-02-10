@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlogDAL
+namespace MyBlogDAL.UnitOfWork.Abstract
 {
     // When this method called all the changes gonna save to the database with saveChanges method.
     // We are going to define all repositories here to manage from one place.
     // Bu sınıfta repo' ların instance I alınacak ve tüm uygulama boyunca buradan kullanılacak singleton'a benzer.
-    // 
-    public interface IUnitOfWork : IDisposable
+
+    public interface IUnitOfWork
     {
 
         ISubjectRepository Subjects { get; }

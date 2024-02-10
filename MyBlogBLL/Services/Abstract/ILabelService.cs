@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlogBLL.Services.Concrete
+namespace MyBlogBLL.Services.Abstract
 {
     public interface ILabelService
     {

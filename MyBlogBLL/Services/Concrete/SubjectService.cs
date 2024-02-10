@@ -1,7 +1,7 @@
-﻿using MyBlogDAL;
-using MyBlogDAL.Context;
+﻿using MyBlogDAL.Context;
 using MyBlogDAL.Repositories.Abstract;
 using MyBlogDAL.Repositories.Concrete;
+using MyBlogDAL.UnitOfWork.Abstract;
 using MyBlogDomain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlogBLL.Services.Abstract
+namespace MyBlogBLL.Services.Concrete
 {
     public class SubjectService : ISubjectRepository
     {

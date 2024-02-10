@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MyBlogDAL.Context
+using MyBlogDAL.Context;
 using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using MyBlogDAL.Repositories.Abstract;
 using MyBlogDomain.Entities;
@@ -16,9 +16,9 @@ namespace MyBlogDAL.Repositories.Concrete
     public class GenericRepository<T> : IRepository<T> where T : class
     {
         
-        protected readonly IdentityDbContext Context;
+        protected readonly DbContext Context;
 
-        public GenericRepository(IdentityDbContext Context)
+        public GenericRepository(DbContext Context)
         {
             this.Context = Context;
         }

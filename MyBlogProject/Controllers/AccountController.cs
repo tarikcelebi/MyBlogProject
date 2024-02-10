@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MyBlogBLL.Services.Abstract;
+using MyBlogBLL.Services.Concrete;
 using MyBlogDomain.Entities;
 using MyBlogProject.Models.AccountVMs;
 using System.Security.Principal;

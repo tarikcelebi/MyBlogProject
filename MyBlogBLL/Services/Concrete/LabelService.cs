@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Label = MyBlogDomain.Entities.Label;
 
-namespace MyBlogBLL.Services.Abstract
+namespace MyBlogBLL.Services.Concrete
 {
     public class LabelService
     {
