@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Abstract
 {
-    public interface IUserService
+    public interface IGenericService<T>
     {
     }
 }

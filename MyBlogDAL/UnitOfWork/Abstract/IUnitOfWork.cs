@@ -17,7 +17,10 @@ namespace MyBlogDAL.UnitOfWork.Abstract
         ISubjectRepository Subjects { get; }
         ILabelRepository Labels { get; }
         IArticleRepository Articles { get; }
+        IPortfolioRepository Portfolios { get; }
+        IAboutRepository Abouts { get; }
         Task<int> CommitAsync();
+        void Dispose();
 
 
     }

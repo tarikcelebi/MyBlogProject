@@ -1,9 +1,11 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyBlogBLL.Services.Concrete;
 using MyBlogDAL.Context;
 using MyBlogDAL.Repositories.Abstract;
 using MyBlogDAL.Repositories.Concrete;
+using MyBlogDAL.UnitOfWork.Abstract;
+using MyBlogDAL.UnitOfWork.Concrete;
 using MyBlogDomain.Entities;
 using System;
 
@@ -11,23 +13,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<MyBlogDbContext>(options =>
-    options.UseSqlServer("connectionString"));
-builder.Services.AddDbContext<AppUserDbContext>(options =>
-    options.UseSqlServer("connectionString"));
-
-builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MyBlogDbContext>();
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString"));
+});
 
 
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
-builder.Services.AddTransient<ISubjectRepository, SubjectRepository>();
+/*
+    Singleton : uygulama ayağa kalktıkta sonra bir adet instance ile devam eder.Memory de tutulur ve çağırıldığında döndürülür.Ram olarak yorucu olabilir.
 
-builder.Services.AddScoped<SubjectService>();
+    Scoped: her request için bir instance yaratılır.
 
-
-builder.Services.AddScoped<UserManager<AppUser>>();
-builder.Services.AddScoped<SignInManager<AppUser>>();
-//builder.Services.AddScoped<PasswordHasher<AppUser>>();
+    Transient: her service çağırıldığında yeni bir intance ile devam edilir. fakat kaynak tüketimi çoktur.
+ 
+ */
 
 var app = builder.Build();
 

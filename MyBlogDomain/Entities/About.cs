@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MyBlogDomain.Entities
 {
-    public abstract class BaseEntity
+    public class About : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-        public DateTime CreationDate { get; set; }
+        public string Name { get; set; }
     }
 }

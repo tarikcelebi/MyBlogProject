@@ -12,26 +12,16 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Concrete
 {
-    public class SubjectService : ISubjectRepository
+    public class SubjectService : GenericService<Subject>, ISubjectRepository
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public SubjectService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public Task AddAsync(Subject entity)
         {
-            _unitOfWork.Subjects.add(entity);
-            await _unitOfWork.CommitAsync();
-
+            throw new NotImplementedException();
         }
 
-        public async Task AddRangeAsync(IEnumerable<Subject> entities)
+        public Task AddRangeAsync(IEnumerable<Subject> entities)
         {
-            _unitOfWork.Subjects.AddRangeAsync(entities);
-            await _unitOfWork.CommitAsync();
+            throw new NotImplementedException();
         }
 
         public void Delete(Subject entity)
@@ -54,22 +44,12 @@ namespace MyBlogBLL.Services.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Subject>> GetAllSubjectsWithArticles()
-        {
-            throw new NotImplementedException();
-        }
-
         public ValueTask<Subject> GetByIdASync(int id)
         {
             throw new NotImplementedException();
         }
 
         public Task<IEnumerable<Subject>> GetWhereListAsync(Expression<Func<Subject, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Subject> GetWithArticleById(int id)
         {
             throw new NotImplementedException();
         }

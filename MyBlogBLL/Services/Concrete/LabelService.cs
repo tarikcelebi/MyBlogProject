@@ -1,4 +1,5 @@
-﻿using MyBlogDAL.Repositories.Abstract;
+﻿using MyBlogBLL.Services.Abstract;
+using MyBlogDAL.Repositories.Abstract;
 using MyBlogDomain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ using Label = MyBlogDomain.Entities.Label;
 
 namespace MyBlogBLL.Services.Concrete
 {
-    public class LabelService
+    public class LabelService : GenericService<Label>, ILabelService
     {
-
-
-
+        public Task<IEnumerable<Label>> GetAllLabels()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

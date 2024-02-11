@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlogBLL.Services.Abstract
+namespace MyBlogDAL.Repositories.Abstract
 {
-    public interface ILabelService : IGenericService<Label>
+    public interface IAboutRepository : IRepository<About>
     {
-        Task<IEnumerable<Label>> GetAllLabels();
     }
 }

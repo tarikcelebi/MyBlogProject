@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Abstract
 {
-    public interface ILabelService : IGenericService<Label>
+    public interface IPortfolioService : IGenericService<Portfolio>
     {
-        Task<IEnumerable<Label>> GetAllLabels();
+
+
     }
 }

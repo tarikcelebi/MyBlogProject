@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Abstract
 {
-    public interface IArticleService
+    public interface IArticleService : IGenericService<Article>
     {
         Task<IEnumerable<Article>> GetArticlesBySubjectId(int id);
     }

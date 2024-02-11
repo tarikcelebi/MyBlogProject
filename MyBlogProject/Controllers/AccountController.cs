@@ -62,12 +62,12 @@ namespace MyBlogProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //[HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> SignIn()
-        {
-            return View( new  AppUserVM {  Subjects = PopulateSubjects() }) ;
-        }
+        ////[HttpGet]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> SignIn()
+        //{
+        //    return View( new  AppUserVM {  Subjects = PopulateSubjects() }) ;
+        //}
 
         [HttpPost]
         [AllowAnonymous]
@@ -88,20 +88,20 @@ namespace MyBlogProject.Controllers
 
         }
 
-        private async Task<IEnumerable<SelectListItem>> PopulateSubjects()
-        {
-            AddSubject();
-            IEnumerable<Subject> Subjects = await subjectService.GetAll();
+        //private async Task<IEnumerable<SelectListItem>> PopulateSubjects()
+        //{
+        //    AddSubject();
+        //    IEnumerable<Subject> Subjects = await subjectService.GetAll();
 
-            IEnumerable<SelectListItem> SubjectsList = (from p in Subjects
-                                                 select new SelectListItem
-                                                 {
-                                                     Text = p.Name,
-                                                     Value = p.Id.ToString()
-                                                 }).ToList();
+        //    IEnumerable<SelectListItem> SubjectsList = (from p in Subjects
+        //                                         select new SelectListItem
+        //                                         {
+        //                                             Text = p.Name,
+        //                                             Value = p.Id.ToString()
+        //                                         }).ToList();
 
-            return SubjectsList;
-        }
+        //    return SubjectsList;
+        //}
 
         private async Task AddSubject()
         {
