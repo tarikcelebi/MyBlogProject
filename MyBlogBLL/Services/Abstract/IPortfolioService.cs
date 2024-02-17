@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Abstract
 {
-    public interface IPortfolioService : IGenericService<Portfolio>
+    public interface IPortfolioService 
     {
 
 

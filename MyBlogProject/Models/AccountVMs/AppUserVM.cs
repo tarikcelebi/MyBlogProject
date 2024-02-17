@@ -6,6 +6,10 @@ namespace MyBlogProject.Models.AccountVMs
 {
     public class AppUserVM
     {
+        public AppUserVM()
+        {
+            Subjects = new List<SelectListItem>();
+        }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -17,6 +21,6 @@ namespace MyBlogProject.Models.AccountVMs
         [Required]
         public string CheckPassword { get; set; }
         public int Age { get; set; }
-        public Task<IEnumerable<SelectListItem>> Subjects { get; set; }
+        public List<SelectListItem> Subjects;
     }
 }

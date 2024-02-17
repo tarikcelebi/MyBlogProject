@@ -10,6 +10,7 @@ namespace MyBlogDomain.Entities
         [Required]
         public string LastName { get; set; }
         //public string Intentions { get; set; }
+        public string ImageURL { get; set; }
         public int Age { get; set; }
         public List<Subject> Subjects { get; set; }
     }

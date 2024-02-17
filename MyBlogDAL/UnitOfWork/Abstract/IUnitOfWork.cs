@@ -1,4 +1,6 @@
 ﻿using MyBlogDAL.Repositories.Abstract;
+using MyBlogDomain.Entities;
+using NuGet.Protocol.Core.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,11 @@ namespace MyBlogDAL.UnitOfWork.Abstract
 
     public interface IUnitOfWork
     {
-
-        ISubjectRepository Subjects { get; }
-        ILabelRepository Labels { get; }
-        IArticleRepository Articles { get; }
-        IPortfolioRepository Portfolios { get; }
-        IAboutRepository Abouts { get; }
+        IRepository<Portfolio> portfolioRepository { get; }
+        IRepository<Subject> subjectRepository { get; }
+        IRepository<Article> articleRepository { get; }
+        IRepository<Label> labelRepository { get; }
+        IRepository<About> aboutRepository { get; }
         Task<int> CommitAsync();
         void Dispose();
 

@@ -19,8 +19,12 @@ builder.Services.AddDbContext<MyBlogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString"));
 });
 
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<MyBlogDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+
+
 
 /*
     Singleton : uygulama ayağa kalktıkta sonra bir adet instance ile devam eder.Memory de tutulur ve çağırıldığında döndürülür.Ram olarak yorucu olabilir.
@@ -32,6 +36,8 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
  */
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

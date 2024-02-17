@@ -9,5 +9,6 @@ namespace MyBlogDAL.Repositories.Abstract
 {
     public interface IAboutRepository : IRepository<About>
     {
+
     }
 }

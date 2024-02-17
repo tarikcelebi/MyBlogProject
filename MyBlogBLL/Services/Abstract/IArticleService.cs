@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Abstract
 {
-    public interface IArticleService : IGenericService<Article>
+    public interface IArticleService 
     {
         Task<IEnumerable<Article>> GetArticlesBySubjectId(int id);
+        Task UpdateArticle(Article updatedArticle, Article article);
+        Task DeleteArticle(Article article);
+        Task<IEnumerable<Article>> GetArticles();
+        Task<bool> CreateArticle(Article article);
+        Task<Article> GetArticleById(int id);
     }
 }

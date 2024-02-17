@@ -14,15 +14,15 @@ namespace MyBlogProject.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
-        private readonly SubjectService subjectService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, SubjectService subjectService)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.subjectService = subjectService;
         }
 
+
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string url)
         {
@@ -35,6 +35,10 @@ namespace MyBlogProject.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
 
             AppUser appUser = await userManager.FindByEmailAsync(loginVM.Email);
 
@@ -50,7 +54,7 @@ namespace MyBlogProject.Controllers
                     else
                         return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Login Failed : Email or password wrong");
+                ModelState.AddModelError(" ", "Login Failed : Email or password wrong");
             }
 
             return View(loginVM);
@@ -62,28 +66,48 @@ namespace MyBlogProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        ////[HttpGet]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> SignIn()
-        //{
-        //    return View( new  AppUserVM {  Subjects = PopulateSubjects() }) ;
-        //}
+        [HttpGet]
+        [AllowAnonymous]
+        public  IActionResult SignIn()
+        {
+            return View();
+        }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> SignIn(AppUserVM user)
+        public async Task<IActionResult> SignIn(SignInVM user)
         {
-            //var hasher = new PasswordHasher<AppUser>();
 
-            //AppUser newUser = new();
-            //newUser.FirstName = user.FirstName;
-            //newUser.LastName = user.LastName;
-            //newUser.Age = user.Age;
-            //newUser.Email = user.Email;
-            //newUser.Subjects = user.Subjects;
-            //newUser.PasswordHash = hasher.HashPassword(newUser, user.Password);
+            if (ModelState.IsValid)
+            {
+                AppUser newUser = new();
+                newUser.FirstName = user.FirstName;
+                newUser.LastName = user.LastName;
+                newUser.Email = user.Email;
+                newUser.UserName = user.Email;
+                newUser.Age = user.Age;
+                newUser.ImageURL = user.ImageURL;
 
-            //await userManager.CreateAsync(newUser);
+                IdentityResult result = await userManager.CreateAsync(newUser, user.Password);
+
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+                else
+                {
+                    foreach (IdentityError item in result.Errors)
+                    {
+                        ModelState.AddModelError("CreateUser", $"{item.Code} - {item.Description}");
+                    }
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "User couldn't created");
+                return RedirectToAction("Index");
+            }
+                
+
+
             return View();
 
         }
@@ -103,57 +127,7 @@ namespace MyBlogProject.Controllers
         //    return SubjectsList;
         //}
 
-        private async Task AddSubject()
-        {
-            List<Subject> subjects = new()
-            {
-                new Subject()
-                {
-                    Name="Felsefe"
 
-                },
-                new Subject()
-                {
-                    Name="Tarih"
-
-                },
-                new Subject()
-                {
-                    Name="Teknoloji",
-
-                },
-                new Subject()
-                {
-                    Name="Siyaset",
-
-                },
-                new Subject()
-                {
-                    Name="Bilim",
-
-                },
-                new Subject()
-                {
-                    Name="Astroloji",
-
-                },
-                new Subject()
-                {
-                    Name="Edebiyat",
-
-                },
-            };
-            try
-            {
-                  await subjectService.AddRangeAsync(subjects);
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-           
-        }
 
     }
 }

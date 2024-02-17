@@ -1,4 +1,5 @@
-﻿using MyBlogDAL.Context;
+﻿using MyBlogBLL.Services.Abstract;
+using MyBlogDAL.Context;
 using MyBlogDAL.Repositories.Abstract;
 using MyBlogDAL.Repositories.Concrete;
 using MyBlogDAL.UnitOfWork.Abstract;
@@ -12,49 +13,43 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Concrete
 {
-    public class SubjectService : GenericService<Subject>, ISubjectRepository
+    public class SubjectService : ISubjectService
     {
-        public Task AddAsync(Subject entity)
+        private readonly IUnitOfWork unitOfWork;
+
+        public SubjectService(IUnitOfWork unitOfWork) 
         {
-            throw new NotImplementedException();
+            this.unitOfWork = unitOfWork;
         }
 
-        public Task AddRangeAsync(IEnumerable<Subject> entities)
+        
+
+        public async Task<bool> CreateSubject(Subject newSubject)
         {
-            throw new NotImplementedException();
+            await unitOfWork.subjectRepository.AddAsync(newSubject);
+            if (await unitOfWork.CommitAsync() > 0)
+                return true;
+            else
+                return false;
         }
 
-        public void Delete(Subject entity)
+        public async Task DeleteSubject(Subject subject)
         {
-            throw new NotImplementedException();
+            unitOfWork.subjectRepository.Delete(subject);
+            await unitOfWork.CommitAsync();
         }
 
-        public void DeleteRange(IEnumerable<Subject> entities)
+        public async Task<IEnumerable<Subject>> GetAllSubjectsWithArticles()
         {
-            throw new NotImplementedException();
+            return await unitOfWork.subjectRepository.GetAllAsync();
         }
 
-        public IEnumerable<Subject> FindAsync(Expression<Func<Subject, bool>> predicate)
+        public async Task<Subject> GetWithArticleById(int id)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.subjectRepository.GetByIdASync(id);
         }
 
-        public Task<IEnumerable<Subject>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ValueTask<Subject> GetByIdASync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Subject>> GetWhereListAsync(Expression<Func<Subject, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Subject> SingleorDefault(Expression<Func<Subject, bool>> expression)
+        public Task UpdateSubject(int id, Subject UpdatedSubject)
         {
             throw new NotImplementedException();
         }

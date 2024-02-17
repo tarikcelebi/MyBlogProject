@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MyBlogBLL.Services.Abstract
 {
-    public interface ISubjectService : IGenericService<Subject>
+    public interface ISubjectService 
     {
         Task<IEnumerable<Subject>> GetAllSubjectsWithArticles();
         Task<Subject> GetWithArticleById(int id);
-        Task<Subject> CreateSubject(Subject newSubject);
+        Task<bool> CreateSubject(Subject newSubject);
         Task UpdateSubject(int id, Subject UpdatedSubject);
         Task DeleteSubject(Subject subject);
     }
