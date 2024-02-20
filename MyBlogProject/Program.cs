@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyBlogBLL.Services.Abstract;
 using MyBlogBLL.Services.Concrete;
 using MyBlogDAL.Context;
 using MyBlogDAL.Repositories.Abstract;
@@ -23,6 +24,13 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<MyBlogDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+
+builder.Services.AddScoped<IAboutService, AboutService>();
+builder.Services.AddScoped<ISkillService, SkillService>();
+
+builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+builder.Services.AddScoped<IAboutRepository, AboutRepository>();
+
 
 
 

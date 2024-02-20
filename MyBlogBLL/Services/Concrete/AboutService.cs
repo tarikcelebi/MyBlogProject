@@ -45,6 +45,7 @@ namespace MyBlogBLL.Services.Concrete
         public async Task UpdateAbout(About aboutTobeUpdated, About about)
         {
             aboutTobeUpdated.Name = about.Name;
+            aboutTobeUpdated.Title = about.Title;
             aboutTobeUpdated.Id = about.Id;
             await unitOfWork.CommitAsync();
         }

@@ -15,7 +15,5 @@ namespace MyBlogBLL.Services.Abstract
         Task<IEnumerable<About>> GetAbouts();
         Task<About> GetAboutById(int id);
 
-
-
     }
 }

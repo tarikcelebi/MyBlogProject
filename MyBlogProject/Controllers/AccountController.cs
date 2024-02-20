@@ -91,7 +91,7 @@ namespace MyBlogProject.Controllers
                 IdentityResult result = await userManager.CreateAsync(newUser, user.Password);
 
                 if (result.Succeeded)
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login");
                 else
                 {
                     foreach (IdentityError item in result.Errors)
@@ -103,12 +103,12 @@ namespace MyBlogProject.Controllers
             else
             {
                 ModelState.AddModelError("", "User couldn't created");
-                return RedirectToAction("Index");
+                return RedirectToAction("Login","Account");
             }
                 
 
 
-            return View();
+            return RedirectToAction("Login");
 
         }
 

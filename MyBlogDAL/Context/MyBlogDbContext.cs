@@ -24,6 +24,9 @@ namespace MyBlogDAL.Context
         public DbSet<MyBlogDomain.Entities.Label> Labels { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<About> Abouts { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
 
 
 

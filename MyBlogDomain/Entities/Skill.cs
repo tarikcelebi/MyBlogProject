@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MyBlogDomain.Entities
 {
-    public class About : BaseEntity
+    public class Skill : BaseEntity
     {
-        public string Name { get; set; }
-        public string Title { get; set; }
-
+        public string SkillName { get; set; }
+        public string Level { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace MyBlogDAL.UnitOfWork.Concrete
         private IRepository<About> AboutRepository;
         private IRepository<Article> ArticleRepository;
         private IRepository<Label> LabelRepository;
+        private IRepository<Skill> SkillRepository;
 
 
         public UnitOfWork(MyBlogDbContext myBlogDbContext)
@@ -46,6 +47,8 @@ namespace MyBlogDAL.UnitOfWork.Concrete
         public IRepository<Label> labelRepository => LabelRepository ?? new LabelRepository(_context);
 
         public IRepository<About> aboutRepository => AboutRepository ?? new AboutRepository(_context);
+
+        public IRepository<Skill> skillRepository => SkillRepository ?? new SkillRepository(_context);
 
         public async Task<int> CommitAsync()
         {

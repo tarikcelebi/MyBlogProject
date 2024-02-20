@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyBlogBLL.Services.Concrete;
 
 namespace MyBlogProject.Controllers
 {
@@ -18,5 +19,17 @@ namespace MyBlogProject.Controllers
         {
             return PartialView();
         }
+
+        public PartialViewResult FeaturePartial()
+        {
+            return PartialView("~/Views/Feature/FeaturePartial.cshtml");
+        }
+
+        //public async Task<PartialViewResult> FeaturePartial()
+        //{
+        //    var AboutList = aboutService.GetAbouts();
+        //    return PartialView(AboutList);
+
+        //}
     }
 }
