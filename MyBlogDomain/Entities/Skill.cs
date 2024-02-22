@@ -8,7 +8,13 @@ namespace MyBlogDomain.Entities
 {
     public class Skill : BaseEntity
     {
+
+        public Skill()
+        {
+            Skills = new List<Skill>();
+        }
         public string SkillName { get; set; }
         public string Level { get; set; }
+        public List<Skill> Skills;
     }
 }

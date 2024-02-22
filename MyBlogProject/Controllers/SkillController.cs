@@ -16,7 +16,7 @@ namespace MyBlogProject.Controllers
         {
 
             var values = await skillService.GetSkills();
-            return View();
+            return View(values);
         }
     }
 }
