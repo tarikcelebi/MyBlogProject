@@ -21,6 +21,7 @@ namespace MyBlogDAL.UnitOfWork.Abstract
         IRepository<Label> labelRepository { get; }
         IRepository<About> aboutRepository { get; }
         IRepository<Skill> skillRepository { get; }
+        IRepository<Experience> experienceRepository { get;  }
         Task<int> CommitAsync();
         void Dispose();
 

@@ -13,7 +13,8 @@ namespace MyBlogBLL.Services.Abstract
         Task<IEnumerable<Article>> GetArticlesBySubjectId(int id);
         Task UpdateArticle(Article updatedArticle, Article article);
         Task DeleteArticle(Article article);
-        Task<IEnumerable<Article>> GetArticles();
+		Task<IEnumerable<Article>> GetAllArticlesAsync();
+		Task<IEnumerable<Article>> GetArticles();
         Task<bool> CreateArticle(Article article);
         Task<Article> GetArticleById(int id);
     }

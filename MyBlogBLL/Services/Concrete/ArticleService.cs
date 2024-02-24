@@ -43,7 +43,12 @@ namespace MyBlogBLL.Services.Concrete
             await unitOfWork.CommitAsync();
         }
 
-        public Task<Article> GetArticleById(int id)
+		public async Task<IEnumerable<Article>> GetAllArticlesAsync()
+		{
+            return await unitOfWork.articleRepository.GetAllAsync();
+		}
+
+		public Task<Article> GetArticleById(int id)
         {
             throw new NotImplementedException();
         }

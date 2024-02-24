@@ -75,7 +75,7 @@ namespace MyBlogProject.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> SignIn(SignInVM user)
+        public async Task<IActionResult> SignUp(SignUpVM user)
         {
 
             if (ModelState.IsValid)

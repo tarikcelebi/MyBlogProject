@@ -27,12 +27,14 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
 builder.Services.AddScoped<IAboutService, AboutService>();
 builder.Services.AddScoped<ISkillService, SkillService>();
+builder.Services.AddScoped<IPortfolioService, PortfolioService>();
+builder.Services.AddScoped<IExperienceService, ExperienceService>();
+
 
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 builder.Services.AddScoped<IAboutRepository, AboutRepository>();
-
-
-
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 
 /*
     Singleton : uygulama ayağa kalktıkta sonra bir adet instance ile devam eder.Memory de tutulur ve çağırıldığında döndürülür.Ram olarak yorucu olabilir.

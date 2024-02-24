@@ -11,5 +11,7 @@ namespace MyBlogDomain.Entities
 
         public string Name { get; set; }
         public string ImageURL { get; set; }
+        public string ProjectUrl { get; set; }
+        public string ImageURL2 { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MyBlogProject.Models.AccountVMs
 {
-    public class SignInVM
+    public class SignUpVM
     {
 
         [Required(ErrorMessage = "Please enter your name.")]
