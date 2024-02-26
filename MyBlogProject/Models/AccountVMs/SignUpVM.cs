@@ -16,7 +16,7 @@ namespace MyBlogProject.Models.AccountVMs
         [Required(ErrorMessage = "Please enter your password again.")]
         [Compare("Password", ErrorMessage = "Passwords didn't match.")]
         public string CheckPassword { get; set; }
-        public string ImageURL { get; set; }
+        public string? ImageURL { get; set; }
         public int Age { get; set; }
     }
 }

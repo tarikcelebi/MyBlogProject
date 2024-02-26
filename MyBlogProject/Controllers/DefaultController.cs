@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyBlogBLL.Services.Concrete;
 
 namespace MyBlogProject.Controllers
 {
+    [Area("StandartUser")]
+    [Authorize]
     public class DefaultController : Controller
     {
         public IActionResult Index()

@@ -14,11 +14,14 @@ namespace MyBlogProject.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
+        private readonly RoleManager<AppUser> roleManager;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppUser> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
+
         }
 
 
@@ -31,34 +34,31 @@ namespace MyBlogProject.Controllers
             return View(loginVM);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginVM loginVM)
-        {
-            if (ModelState.IsValid)
+            [HttpPost]
+            [AllowAnonymous]
+            public async Task<IActionResult> Login(LoginVM loginVM)
             {
 
-            }
 
-            AppUser appUser = await userManager.FindByEmailAsync(loginVM.Email);
+                AppUser appUser = await userManager.FindByEmailAsync(loginVM.Email);
 
-            if (appUser != null)
-            {
-                await signInManager.SignOutAsync();
-                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(appUser, loginVM.Password, false, false);
-                if (result.Succeeded)
+                if (appUser != null)
                 {
-                    bool isAdmin = await userManager.IsInRoleAsync(appUser, "Admin");
-                    if (isAdmin)
-                        return RedirectToAction("Index", "Home");
-                    else
-                        return RedirectToAction("Index", "Home");
+                    await signInManager.SignOutAsync();
+                    Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(appUser, loginVM.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        bool isAdmin = await userManager.IsInRoleAsync(appUser, "Admin");
+                        if (isAdmin)
+                            return RedirectToAction("Index", "Default");
+                        else
+                            return RedirectToAction("Index", "Default");
+                    }
+                    ModelState.AddModelError(" ", "Login Failed : Email or password wrong");
                 }
-                ModelState.AddModelError(" ", "Login Failed : Email or password wrong");
-            }
 
-            return View(loginVM);
-        }
+                return View(loginVM);
+            }
 
         public async Task<IActionResult> Logout()
         {
@@ -68,7 +68,7 @@ namespace MyBlogProject.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public  IActionResult SignIn()
+        public IActionResult SignUp()
         {
             return View();
         }
@@ -78,37 +78,34 @@ namespace MyBlogProject.Controllers
         public async Task<IActionResult> SignUp(SignUpVM user)
         {
 
-            if (ModelState.IsValid)
+            AppUser newUser = new();
+            newUser.FirstName = user.FirstName;
+            newUser.LastName = user.LastName;
+            newUser.Email = user.Email;
+            newUser.UserName = user.Email;
+            newUser.Age = user.Age;
+
+
+            //newUser.ImageURL = user.ImageURL;
+
+            if (user.Password == user.CheckPassword)
             {
-                AppUser newUser = new();
-                newUser.FirstName = user.FirstName;
-                newUser.LastName = user.LastName;
-                newUser.Email = user.Email;
-                newUser.UserName = user.Email;
-                newUser.Age = user.Age;
-                newUser.ImageURL = user.ImageURL;
-
                 IdentityResult result = await userManager.CreateAsync(newUser, user.Password);
-
                 if (result.Succeeded)
                     return RedirectToAction("Login");
                 else
                 {
                     foreach (IdentityError item in result.Errors)
                     {
-                        ModelState.AddModelError("CreateUser", $"{item.Code} - {item.Description}");
+                        ModelState.AddModelError(" ", $"{item.Description}");
                     }
                 }
+
             }
-            else
-            {
-                ModelState.AddModelError("", "User couldn't created");
-                return RedirectToAction("Login","Account");
-            }
-                
+            return View();
 
 
-            return RedirectToAction("Login");
+
 
         }
 
