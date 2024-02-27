@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,8 @@ namespace MyBlogDomain.Entities
 		public string? Clubs { get; set; }
 		[MaxLength(50)]
 		public string? Degree { get; set; }
+        [ForeignKey("AppUser")]
+        public string? AppUserID { get; set; }
+        public AppUser? AppUser { get; set; }
     }
 }

@@ -16,5 +16,6 @@ namespace MyBlogDomain.Entities
         public string SkillName { get; set; }
         public string Level { get; set; }
         public List<Skill> Skills;
+        public List<AppUser> AppUsers { get; set; }
     }
 }

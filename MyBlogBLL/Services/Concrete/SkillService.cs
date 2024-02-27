@@ -4,6 +4,7 @@ using MyBlogDomain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,13 @@ namespace MyBlogBLL.Services.Concrete
         public async Task<IEnumerable<Skill>> GetSkills()
         {
             return await unitOfWork.skillRepository.GetAllAsync();
+        }
+
+        public async Task<Skill> GetUserSkills(string expression)
+        {
+            //return await unitOfWork.skillRepository.GetWhereListAsync(x => x.AppUsers.Find(expression.FirstOrDefault(x => expression.)));
+            throw new NotImplementedException();
+
         }
 
         public Task UpdateSkill(Skill skillTobeUpdated, Skill skill)

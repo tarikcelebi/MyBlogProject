@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,5 +15,6 @@ namespace MyBlogBLL.Services.Abstract
         Task DeleteSkill(Skill skill);
         Task<IEnumerable<Skill>> GetSkills();
         Task<Skill> GetSkillById(int id);
+        Task<Skill> GetUserSkills(string expression);
     }
 }

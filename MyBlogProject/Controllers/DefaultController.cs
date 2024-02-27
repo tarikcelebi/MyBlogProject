@@ -4,10 +4,11 @@ using MyBlogBLL.Services.Concrete;
 
 namespace MyBlogProject.Controllers
 {
-    [Area("StandartUser")]
-    [Authorize]
+
+    [Authorize(Roles = "StandartUser")]
     public class DefaultController : Controller
     {
+
         public IActionResult Index()
         {
             return View();
@@ -36,3 +37,4 @@ namespace MyBlogProject.Controllers
         //}
     }
 }
+//123456aA

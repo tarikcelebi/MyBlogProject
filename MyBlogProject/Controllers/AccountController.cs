@@ -9,14 +9,16 @@ using System.Security.Principal;
 
 namespace MyBlogProject.Controllers
 {
+
     [Authorize]
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
-        private readonly RoleManager<AppUser> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppUser> roleManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -34,31 +36,31 @@ namespace MyBlogProject.Controllers
             return View(loginVM);
         }
 
-            [HttpPost]
-            [AllowAnonymous]
-            public async Task<IActionResult> Login(LoginVM loginVM)
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginVM loginVM)
+        {
+
+
+            AppUser appUser = await userManager.FindByEmailAsync(loginVM.Email);
+
+            if (appUser != null)
             {
-
-
-                AppUser appUser = await userManager.FindByEmailAsync(loginVM.Email);
-
-                if (appUser != null)
+                await signInManager.SignOutAsync();
+                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(appUser, loginVM.Password, true, true);
+                if (result.Succeeded)
                 {
-                    await signInManager.SignOutAsync();
-                    Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(appUser, loginVM.Password, false, false);
-                    if (result.Succeeded)
-                    {
-                        bool isAdmin = await userManager.IsInRoleAsync(appUser, "Admin");
-                        if (isAdmin)
-                            return RedirectToAction("Index", "Default");
-                        else
-                            return RedirectToAction("Index", "Default");
-                    }
-                    ModelState.AddModelError(" ", "Login Failed : Email or password wrong");
+                    bool isAdmin = await userManager.IsInRoleAsync(appUser, "Admin");
+                    if (isAdmin)
+                        return RedirectToAction("Index", "Default");
+                    else
+                        return RedirectToAction("Index", "Default");
                 }
-
-                return View(loginVM);
+                ModelState.AddModelError(" ", "Login Failed : Email or password wrong");
             }
+
+            return View(loginVM);
+        }
 
         public async Task<IActionResult> Logout()
         {
