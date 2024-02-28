@@ -1,0 +1,17 @@
+﻿@using MyBlogDomain.Entities
+@model Skill
+@{
+    ViewData["Title"] = "AddSkill";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h1>Add Skill</h1>
+<form class="form-control" method="post">
+    <label asp-for="SkillName">Skill Name</label>
+    <input type="text" asp-for="SkillName" class="form-control" />
+    <label asp-for="Level"></label>
+    <input asp-for="Level" type="text" class="form-control" />
+    <button type="submit" class="form-control"> Add</button>
+</form>
+

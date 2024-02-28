@@ -25,8 +25,31 @@ namespace MyBlogProject.Controllers
         {
             AppUser person = await userManager.FindByNameAsync(User.Identity.Name);
 
-            var values = await skillService.GetSkills();
+            var values = await skillService.GetUserSkillByUser(person);
             return View(values);
+        }
+
+        public async Task<IActionResult> AddSkill()
+        {
+            Skill nw = new Skill();
+            return View(nw);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSkill(Skill skill)
+        {
+
+            AppUser appUser = await userManager.FindByNameAsync(User.Identity.Name);
+            //Skill newSkill = new Skill();
+            //newSkill.SkillName = skill.SkillName;
+            //newSkill.Level = skill.Level;
+            if(await skillService.AddingSkillForUser(appUser, skill) == true)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+            return View();
         }
     }
 }

@@ -15,6 +15,8 @@ namespace MyBlogBLL.Services.Abstract
         Task DeleteSkill(Skill skill);
         Task<IEnumerable<Skill>> GetSkills();
         Task<Skill> GetSkillById(int id);
-        Task<Skill> GetUserSkills(string expression);
+        Task<bool> AddingSkillForUser(AppUser user, Skill skill);
+        Task<IEnumerable<Skill>> GetUserSkillByUser(AppUser user);
+
     }
 }

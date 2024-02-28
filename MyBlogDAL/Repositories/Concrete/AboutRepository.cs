@@ -12,10 +12,17 @@ namespace MyBlogDAL.Repositories.Concrete
 {
     public class AboutRepository : GenericRepository<About>, IAboutRepository
     {
+        private readonly MyBlogDbContext Context;
+
         public AboutRepository(MyBlogDbContext Context) : base(Context)
         {
+            this.Context=Context;
 
+        }
 
+        public async Task<IEnumerable<About>> GetUserAboutsByUser(AppUser user)
+        {
+            return await Context.Abouts.Where(x => x.AppUserID == user.Id).ToListAsync();
         }
     }
 }

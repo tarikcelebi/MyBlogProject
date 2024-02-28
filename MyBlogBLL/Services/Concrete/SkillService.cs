@@ -20,6 +20,29 @@ namespace MyBlogBLL.Services.Concrete
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task<bool> AddingSkillForUser(AppUser user,Skill skill)
+        {
+            var existingSkill = await unitOfWork.skillRepository.SingleorDefault(s => s.Id == skill.Id);
+
+            if (existingSkill != null)
+            {
+
+                existingSkill.AppUsers.Add(user);
+            }
+            else
+            {
+                skill.AppUsers = new List<AppUser> { user };
+                await unitOfWork.skillRepository.AddAsync(skill);
+            }
+
+            // Save changes to the database
+            if (await unitOfWork.CommitAsync() > 0)
+                return true;
+            else
+                return false;
+
+        }
+
         public Task<Skill> CreateSkill(Skill skill)
         {
             throw new NotImplementedException();
@@ -38,6 +61,11 @@ namespace MyBlogBLL.Services.Concrete
         public async Task<IEnumerable<Skill>> GetSkills()
         {
             return await unitOfWork.skillRepository.GetAllAsync();
+        }
+
+        public async Task<IEnumerable<Skill>> GetUserSkillByUser(AppUser user)
+        {
+            return await unitOfWork.skillRepository.GetWhereListAsync(x => x.AppUsers.Any(AppUser=>AppUser.Id == user.Id));
         }
 
         public async Task<Skill> GetUserSkills(string expression)

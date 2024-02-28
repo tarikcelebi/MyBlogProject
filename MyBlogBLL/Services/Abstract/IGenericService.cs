@@ -12,6 +12,7 @@ namespace MyBlogBLL.Services.Abstract
 
         ValueTask<T> GetByIdASync(int id);
         Task AddAsync(T entity);
+       
         void Delete(T entity);
         void DeleteRange(IEnumerable<T> entities);
         Task AddRangeAsync(IEnumerable<T> entities);

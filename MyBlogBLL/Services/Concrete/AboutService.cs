@@ -1,4 +1,5 @@
-﻿using MyBlogBLL.Services.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using MyBlogBLL.Services.Abstract;
 using MyBlogDAL.UnitOfWork.Abstract;
 using MyBlogDomain.Entities;
 using System;
@@ -40,6 +41,11 @@ namespace MyBlogBLL.Services.Concrete
         public async Task<IEnumerable<About>> GetAbouts()
         {
             return await unitOfWork.aboutRepository.GetAllAsync();
+        }
+
+        public async Task<IEnumerable<About>> GetUserAboutsByUser(AppUser user)
+        {
+            return await unitOfWork.aboutRepository.GetWhereListAsync(x => x.AppUserID == user.Id);
         }
 
         public async Task UpdateAbout(About aboutTobeUpdated, About about)
