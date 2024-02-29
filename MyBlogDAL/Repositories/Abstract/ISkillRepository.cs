@@ -9,6 +9,6 @@ namespace MyBlogDAL.Repositories.Abstract
 {
     public interface ISkillRepository : IRepository<Skill>
     {
-
+        Task<Skill> GetByIdWithIncludesAsync(int id,AppUser appUser);
     }
 }

@@ -58,10 +58,14 @@ namespace MyBlogDAL.Repositories.Concrete
             return Context.Set<T>().FindAsync(id);
         }
 
+
+
         public async Task<IEnumerable<T>> GetWhereListAsync(Expression<Func<T, bool>> expression)
         {
             return await Context.Set<T>().Where(expression).ToListAsync();
         }
+
+        
 
         public async Task<T> SingleorDefault(Expression<Func<T, bool>> expression)
         {

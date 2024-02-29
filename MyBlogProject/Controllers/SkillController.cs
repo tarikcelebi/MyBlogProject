@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlogBLL.Services.Abstract;
 using MyBlogDomain.Entities;
+using MyBlogProject.Models.SkillVMs;
 using System.Data;
 
 namespace MyBlogProject.Controllers
 {
-    [Authorize(Roles="StandartUser")]
+    [Authorize(Roles = "StandartUser")]
     public class SkillController : Controller
     {
         private readonly ISkillService skillService;
@@ -18,7 +19,7 @@ namespace MyBlogProject.Controllers
             this.skillService = skillService;
             this.userManager = userManager;
 
-            
+
         }
 
         public async Task<IActionResult> Index()
@@ -43,13 +44,34 @@ namespace MyBlogProject.Controllers
             //Skill newSkill = new Skill();
             //newSkill.SkillName = skill.SkillName;
             //newSkill.Level = skill.Level;
-            if(await skillService.AddingSkillForUser(appUser, skill) == true)
+            if (await skillService.AddingSkillForUser(appUser, skill) == true)
             {
                 return RedirectToAction("Index");
             }
 
 
             return View();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSkill(Skill Skill)
+        {
+            Skill SkillToBeDeleted = await skillService.GetSkillByName(Skill.SkillName);
+            AppUser person = await userManager.FindByNameAsync(User.Identity.Name);
+            if (SkillToBeDeleted != null)
+            {
+                if (await skillService.RemoveSkillForUser(SkillToBeDeleted, person))
+                    return RedirectToAction("Index");
+                //else
+                //{
+                //    ModelState.AddModelError(" ", "Silme işlemi sırasında bir sıkıntı oluştu.");
+
+                //}
+
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -13,8 +13,10 @@ namespace MyBlogBLL.Services.Abstract
         Task<Skill> CreateSkill(Skill skill);
         Task UpdateSkill(Skill skillTobeUpdated, Skill skill);
         Task DeleteSkill(Skill skill);
+        Task<bool> RemoveSkillForUser(Skill skill,AppUser appUser);
         Task<IEnumerable<Skill>> GetSkills();
         Task<Skill> GetSkillById(int id);
+        Task<Skill> GetSkillByName(string Name);
         Task<bool> AddingSkillForUser(AppUser user, Skill skill);
         Task<IEnumerable<Skill>> GetUserSkillByUser(AppUser user);
 

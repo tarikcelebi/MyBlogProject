@@ -19,6 +19,6 @@ namespace MyBlogDAL.Repositories.Abstract
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> SingleorDefault(Expression<Func<T, bool>> expression);
         Task<IEnumerable<T>> GetWhereListAsync(Expression<Func<T, bool>> expression);
-        
+
     }
 }

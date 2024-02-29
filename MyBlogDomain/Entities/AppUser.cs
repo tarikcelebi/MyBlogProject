@@ -5,6 +5,10 @@ namespace MyBlogDomain.Entities
 {
     public class AppUser : IdentityUser
     {
+        public AppUser()
+        {
+            Skills = new List<Skill>();
+        }
         [Required]
         public string FirstName { get; set; }
         [Required]

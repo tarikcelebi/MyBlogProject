@@ -14,13 +14,14 @@ namespace MyBlogDAL.UnitOfWork.Concrete
     public class UnitOfWork : IUnitOfWork
     {
         private readonly MyBlogDbContext _context;
-        private IRepository<Portfolio> PortfolioRepository;
-        private IRepository<Subject> SubjectRepository;
-        private IRepository<About> AboutRepository;
-        private IRepository<Article> ArticleRepository;
-        private IRepository<Label> LabelRepository;
-        private IRepository<Skill> SkillRepository;
-        private IRepository<Experience> ExperienceRepository;
+
+        private SubjectRepository SubjectRepository;
+        private AboutRepository AboutRepository;
+        private ArticleRepository ArticleRepository;
+        private LabelRepository LabelRepository;
+        private ExperienceRepository ExperienceRepository;
+        private PortfolioRepository PortfolioRepository;
+        private SkillRepository SkillRepository;
 
 
         public UnitOfWork(MyBlogDbContext myBlogDbContext)
@@ -28,30 +29,21 @@ namespace MyBlogDAL.UnitOfWork.Concrete
             _context = myBlogDbContext;
         }
 
-        //public ISubjectRepository Subjects => SubjectRepository = SubjectRepository ?? new SubjectRepository(_context);
-
-        //public ILabelRepository Labels => LabelRepository = LabelRepository ?? new LabelRepository(_context);
-
-        //public IArticleRepository Articles => ArticleRepository = ArticleRepository ?? new ArticleRepository(_context);
-
-        //public IPortfolioRepository Portfolios => PortfolioRepository = PortfolioRepository ?? new PortfolioRepository(_context);
-
-        //public IAboutRepository Abouts => AboutRepository = AboutRepository ?? new AboutRepository(_context);
 
 
-        public IRepository<Portfolio> portfolioRepository => PortfolioRepository ?? new PortfolioRepository(_context);
+        PortfolioRepository IUnitOfWork.portfolioRepository => PortfolioRepository ?? new PortfolioRepository(_context);
 
-        public IRepository<Subject> subjectRepository => SubjectRepository ?? new SubjectRepository(_context);
+        SkillRepository IUnitOfWork.skillRepository => SkillRepository ?? new SkillRepository(_context);
 
-        public IRepository<Article> articleRepository => ArticleRepository??new ArticleRepository(_context);
+        SubjectRepository IUnitOfWork.subjectRepository => SubjectRepository??new SubjectRepository(_context);
 
-        public IRepository<Label> labelRepository => LabelRepository ?? new LabelRepository(_context);
+        ArticleRepository IUnitOfWork.articleRepository => ArticleRepository ?? new ArticleRepository(_context);
 
-        public IRepository<About> aboutRepository => AboutRepository ?? new AboutRepository(_context);
+        LabelRepository IUnitOfWork.labelRepository => LabelRepository ?? new LabelRepository(_context);
 
-        public IRepository<Skill> skillRepository => SkillRepository ?? new SkillRepository(_context);
+        AboutRepository IUnitOfWork.aboutRepository => AboutRepository ?? new AboutRepository(_context);
 
-        public IRepository<Experience> experienceRepository => ExperienceRepository ?? new ExperienceRepository(_context);
+        ExperienceRepository IUnitOfWork.experienceRepository => ExperienceRepository ?? new ExperienceRepository(_context);
 
         public async Task<int> CommitAsync()
         {

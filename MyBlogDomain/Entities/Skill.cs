@@ -12,6 +12,7 @@ namespace MyBlogDomain.Entities
         public Skill()
         {
             Skills = new List<Skill>();
+            AppUsers = new List<AppUser>();
         }
         public string SkillName { get; set; }
         public string Level { get; set; }

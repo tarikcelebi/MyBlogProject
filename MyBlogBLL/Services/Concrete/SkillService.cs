@@ -25,22 +25,16 @@ namespace MyBlogBLL.Services.Concrete
             var existingSkill = await unitOfWork.skillRepository.SingleorDefault(s => s.Id == skill.Id);
 
             if (existingSkill != null)
-            {
-
                 existingSkill.AppUsers.Add(user);
-            }
             else
             {
                 skill.AppUsers = new List<AppUser> { user };
                 await unitOfWork.skillRepository.AddAsync(skill);
             }
-
-            // Save changes to the database
             if (await unitOfWork.CommitAsync() > 0)
                 return true;
             else
                 return false;
-
         }
 
         public Task<Skill> CreateSkill(Skill skill)
@@ -53,9 +47,28 @@ namespace MyBlogBLL.Services.Concrete
             throw new NotImplementedException();
         }
 
+        public async Task<bool> RemoveSkillForUser(Skill skill, AppUser appUser)
+        {
+            var existingSkill = await unitOfWork.skillRepository.GetByIdWithIncludesAsync(skill.Id, appUser);
+
+            if (existingSkill != null)
+            {
+                appUser.Skills.Remove(existingSkill); 
+                if (await unitOfWork.CommitAsync() > 0) 
+                    return true;
+            }
+
+            return false;
+        }
+
         public Task<Skill> GetSkillById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Skill> GetSkillByName(string Name)
+        {
+            return await unitOfWork.skillRepository.SingleorDefault(x => x.SkillName == Name) ?? new Skill { SkillName="boş"};
         }
 
         public async Task<IEnumerable<Skill>> GetSkills()
