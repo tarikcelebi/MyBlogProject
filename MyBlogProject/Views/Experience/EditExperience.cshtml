@@ -1,0 +1,24 @@
+﻿@using MyBlogDomain.Entities
+@model Experience
+@{
+    ViewData["Title"] = "EditExperience";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit Experience</h1>
+<form class="form-control" method="post">
+    <input asp-for="Id" value="@Model.Id" hidden/>
+    <label asp-for="CompanyName">Company Name</label>
+    <input type="text" asp-for="CompanyName" value="@Model.CompanyName" class="form-control" />
+    <label asp-for="Address"></label>
+    <input asp-for="Address" type="text" value="@Model.Address" class="form-control" />
+    <label asp-for="Title"></label>
+    <input asp-for="Title" type="text" value="@Model.Title" class="form-control" />
+    <label asp-for="DescriptionOfRole"></label>
+    <input asp-for="DescriptionOfRole" type="text" value="@Model.DescriptionOfRole" class="form-control" />
+    <label asp-for="StartDate"></label>
+    <input asp-for="StartDate" type="date" value="@Model.StartDate" class="form-control" />
+    <label asp-for="EndDate"></label>
+    <input asp-for="EndDate" type="date" value="@Model.EndDate" class="form-control" />
+    <button type="submit" class="form-control"> Edit</button>
+</form>

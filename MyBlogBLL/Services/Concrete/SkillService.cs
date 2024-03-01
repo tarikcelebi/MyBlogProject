@@ -61,9 +61,9 @@ namespace MyBlogBLL.Services.Concrete
             return false;
         }
 
-        public Task<Skill> GetSkillById(int id)
+        public async Task<Skill> GetSkillById(int id)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.skillRepository.GetByIdASync(id);
         }
 
         public async Task<Skill> GetSkillByName(string Name)
@@ -76,7 +76,7 @@ namespace MyBlogBLL.Services.Concrete
             return await unitOfWork.skillRepository.GetAllAsync();
         }
 
-        public async Task<IEnumerable<Skill>> GetUserSkillByUser(AppUser user)
+        public async Task<IEnumerable<Skill>> GetUserSkillsByUser(AppUser user)
         {
             return await unitOfWork.skillRepository.GetWhereListAsync(x => x.AppUsers.Any(AppUser=>AppUser.Id == user.Id));
         }
@@ -91,6 +91,19 @@ namespace MyBlogBLL.Services.Concrete
         public Task UpdateSkill(Skill skillTobeUpdated, Skill skill)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> UpdateSkillForUser(Skill skillTobeUpdated, AppUser appUser)
+        {
+            Skill skillWithUser = await unitOfWork.skillRepository
+            .GetByIdWithIncludesAsync(skillTobeUpdated.Id, appUser);
+
+            skillWithUser.SkillName = skillTobeUpdated.SkillName;
+            skillWithUser.Level = skillTobeUpdated.Level;
+
+            if (await unitOfWork.CommitAsync() > 1)
+                return true;
+            return false;
         }
     }
 }

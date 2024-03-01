@@ -9,6 +9,6 @@ namespace MyBlogDAL.Repositories.Abstract
 {
     public interface IExperienceRepository : IRepository<Experience>
     {
-
+        Task<Experience> GetExperienceByIdIncludeUserAsync(int id, AppUser appUser);
     }
 }

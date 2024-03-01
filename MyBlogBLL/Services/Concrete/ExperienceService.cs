@@ -20,9 +20,35 @@ namespace MyBlogBLL.Services.Concrete
             this.unitOfWork = unitOfWork;
         }
 
-        public Task AddExperienceAsync(Experience experience)
+        public async Task CreateExperienceWithUserAsync(Experience experience,AppUser user)
         {
-            throw new NotImplementedException();
+            Experience newExperience = new();
+            newExperience.AppUserID = user.Id;
+            newExperience.Address = experience.Address;
+            newExperience.CompanyName = experience.CompanyName;
+            newExperience.Title = experience.Title;
+            newExperience.StartDate = experience.StartDate;
+            newExperience.EndDate = experience.EndDate;
+            newExperience.DescriptionOfRole = experience.DescriptionOfRole;
+            await unitOfWork.experienceRepository.AddAsync(newExperience);
+            await unitOfWork.CommitAsync();
+
+        }
+
+        public async Task<bool> AddingExperienceForUser(AppUser user, Experience experience)
+        {
+            Experience IsExist = await unitOfWork.experienceRepository.SingleorDefault(e => e.Id == experience.Id && e.AppUserID == user.Id);
+            if (IsExist == null)
+            {
+                await CreateExperienceWithUserAsync(experience,user);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
         }
 
         public Task AddRangExperienceAsync(IEnumerable<Experience> experiences)
@@ -50,9 +76,14 @@ namespace MyBlogBLL.Services.Concrete
             return await unitOfWork.experienceRepository.GetAllAsync();
         }
 
-        public ValueTask<Experience> GetExperienceByIdASync(int id)
+        public async ValueTask<Experience> GetExperienceByIdASync(int id)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.experienceRepository.GetByIdASync(id);
+        }
+
+        public async Task<IEnumerable<Experience>> GetUserExperiencesForUser(AppUser user)
+        {
+            return await unitOfWork.experienceRepository.GetWhereListAsync(x => x.AppUserID==user.Id);
         }
 
         public Task<IEnumerable<Experience>> GetWhereListAsync(Expression<Func<Experience, bool>> expression)
@@ -60,9 +91,41 @@ namespace MyBlogBLL.Services.Concrete
             throw new NotImplementedException();
         }
 
+        public async Task<bool> RemoveExperienceForUser(Experience experience, AppUser appUser)
+        {
+            Experience experience1 = await unitOfWork.experienceRepository.GetExperienceByIdIncludeUserAsync(experience.Id, appUser);
+            experience1.AppUser.Experiences.Remove(experience);
+            if (await unitOfWork.CommitAsync() > 0)
+                return true;
+            return false;
+
+
+        }
+
         public Task<Experience> SingleorDefault(Expression<Func<Experience, bool>> expression)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> UpdateExperienceForUser(Experience experienceToBeUpdated, AppUser appUser)
+        {
+            Experience edittedExperience = await unitOfWork.experienceRepository.SingleorDefault(e=>e.Id==experienceToBeUpdated.Id);
+
+            if(edittedExperience!=null)
+            {
+                edittedExperience.AppUserID = appUser.Id;
+                edittedExperience.Address = experienceToBeUpdated.Address;
+                edittedExperience.CompanyName = experienceToBeUpdated.CompanyName;
+                edittedExperience.Title = experienceToBeUpdated.Title;
+                edittedExperience.StartDate = experienceToBeUpdated.StartDate;
+                edittedExperience.EndDate = experienceToBeUpdated.EndDate;
+                edittedExperience.DescriptionOfRole = experienceToBeUpdated.DescriptionOfRole;
+                if (await unitOfWork.CommitAsync() > 0)
+                    return true;
+                return false;
+            }
+            return false;
+
         }
     }
 }
