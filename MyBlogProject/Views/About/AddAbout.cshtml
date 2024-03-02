@@ -1,0 +1,33 @@
+﻿@using MyBlogProject.Models.AboutVMs
+@model AddAboutVM
+@{
+    ViewData["Title"] = "AddAbout";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h5>Your main page fill the below part to show your first impression(First impression always remembers!!)</h5>
+<form class="form-control" method="post" enctype="multipart/form-data">
+    <label asp-for="Name">Name</label>
+    <input type="text" asp-for="Name" class="form-control" />
+
+    <label asp-for="Title"></label>
+    <input asp-for="Title" type="text" class="form-control" />
+
+    <label asp-for="Age"></label>
+    <input asp-for="Age" type="number" class="form-control" />
+
+    <label asp-for="Description">Description Of Yourself</label>
+    <input asp-for="Description" type="text" class="form-control" />
+    
+    <label asp-for="Phone"></label>
+    <input asp-for="Phone" type="tel" class="form-control" />
+
+    <label asp-for="ProfilePic">Upload Photo</label>
+    <input asp-for="ProfilePic" type="file" class="form-control" />
+    <span asp-validation-for="ProfilePic" class="text-danger"></span>
+
+    <input asp-for="AppUserId" value="@User.Identity.Name" hidden />
+    <div class="text-danger" asp-validation-summary="All" ></div>
+    <button type="submit" class="form-control"> Add </button>
+</form>
+

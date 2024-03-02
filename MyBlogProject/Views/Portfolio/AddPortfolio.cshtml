@@ -1,0 +1,28 @@
+﻿@using MyBlogProject.Models.PortfolioVMs
+@model AddPortfolioVM
+@{
+    ViewData["Title"] = "AddPortfolio";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Add Portfolio</h1>
+<form class="form-control" method="post" enctype="multipart/form-data">
+    <label asp-for="Name">Name</label>
+    <input type="text" asp-for="Name" class="form-control" />
+
+    <label asp-for="ProjectUrl"></label>
+    <input asp-for="ProjectUrl" type="url" class="form-control" />
+
+    <label asp-for="ProjectPic">Upload Photo</label>
+    <input asp-for="ProjectPic" type="file" class="form-control" />
+    <span asp-validation-for="ProjectPic" class="text-danger"></span>
+
+    <label asp-for="ProjectPic">Upload Photo</label>
+    <input asp-for="ProjectPic2" type="file" class="form-control" />
+    <span asp-validation-for="ProjectPic2" class="text-danger"></span>
+
+    <input asp-for="AppUserId" value="@User.Identity.Name" hidden />
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <button type="submit" class="form-control"> Add </button>
+</form>
+

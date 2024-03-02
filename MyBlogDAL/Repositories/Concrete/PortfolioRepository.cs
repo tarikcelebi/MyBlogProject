@@ -12,9 +12,24 @@ namespace MyBlogDAL.Repositories.Concrete
 {
     public class PortfolioRepository : GenericRepository<Portfolio>, IPortfolioRepository
     {
+        private readonly MyBlogDbContext Context;
+
         public PortfolioRepository(MyBlogDbContext Context) : base(Context)
         {
+            this.Context = Context;
+        }
 
+        public async Task<Portfolio> GetPortfolioByIdIncludeUserAsync(int id, AppUser appUser)
+        {
+            return await Context.Portfolios.Include(u => appUser)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<IEnumerable<Portfolio>> GetUserPortfoliosByUser(AppUser user)
+        {
+            return await Context.Portfolios
+                .Where(p => p.AppUserID == user.Id)
+                .ToListAsync();
         }
     }
 }

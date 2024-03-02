@@ -14,7 +14,10 @@ namespace MyBlogBLL.Services.Abstract
         Task DeleteAbout(About about);
         Task<IEnumerable<About>> GetAbouts();
         Task<About> GetAboutById(int id);
-        Task<IEnumerable<About>> GetUserAboutsByUser(AppUser user);
-
+        Task<About> GetUserAboutByUser(AppUser user);
+        Task<bool> AddAboutByUser(About about);
+        bool checkAbout(AppUser appUser);
+        Task<bool> RemoveAboutForUser(About about, AppUser appUser);
+        Task<bool> UpdateAboutForUser(About edittingAbout, AppUser appUser);
     }
 }

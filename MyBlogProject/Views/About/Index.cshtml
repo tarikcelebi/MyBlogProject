@@ -1,0 +1,84 @@
+﻿@using MyBlogDomain.Entities
+@model About
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h5>Your main page fill the below part to show your first impression(First impression always remembers!)</h5>
+<div class="card-body px-0 pt-0 pb-2">
+    <a href="@Url.Action("AddAbout","About")" class="btn btn-secondary">Add New Feature</a>
+</div>
+<div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center justify-content-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Full Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description of Yourself</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Title</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Age</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Phone Number</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Your pics</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Delete</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    <tr>
+                        <td>
+                            <p class="text-sm font-weight-bold mb-0">
+                                @if (string.IsNullOrEmpty(Model.Name))
+                                {
+                                    <span class="text-danger">Lütfen değer giriniz</span>
+                                }
+                                else
+                                {
+                                    @Model.Name
+                                }
+                            </p>
+                        </td>
+                        <td>
+                            <p class="text-sm font-weight-bold mb-0">@Model.Description</p>
+                        </td>
+                        <td>
+                            <p class="text-sm font-weight-bold mb-0">@Model.Title</p>
+                        </td>
+                        <td>
+                            <p class="text-sm font-weight-bold mb-0">@Model.Age</p>
+                        </td>
+                        <td>
+                            <p class="text-sm font-weight-bold mb-0">@Model.Phone</p>
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(Model.ImageURL))
+                            {
+                                <img src="@Model.ImageURL" alt="Profile Picture" class="img-fluid" />
+                            }
+                            else
+                            {
+                                <p>No Image</p>
+                            }
+                        </td>
+                        <td class="align-middle">
+                            <a href="@Url.Action("RemoveAbout", "About", new { aboutId = Model.Id })" class="btn btn-danger">Delete</a>
+                        </td>
+                        <td class="align-middle">
+                            <a href="@Url.Action("EditAbout", "About", new { aboutId = Model.Id })" class="btn btn-secondary">Edit</a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-danger">Please enter values for about part.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+

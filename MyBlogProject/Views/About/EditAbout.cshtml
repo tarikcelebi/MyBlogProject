@@ -1,0 +1,51 @@
+﻿@using MyBlogDomain.Entities
+@model About
+@{
+    ViewData["Title"] = "EditAbout";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (Model == null)
+{
+    <div class="text-danger">The requested item was not found.</div>
+}
+else
+{
+    <h1>EditAbout</h1>
+    <form class="form-control" method="post" enctype="multipart/form-data">
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" value="@Model.Name" class="form-control" />
+
+        <label asp-for="Title"></label>
+        <input asp-for="Title" type="text" value="@Model.Title" class="form-control" />
+
+        <label asp-for="Age"></label>
+        <input asp-for="Age" type="number" value="@Model.Age" class="form-control" />
+
+        <label asp-for="Description">Description Of Yourself</label>
+        <input asp-for="Description" type="text" value="@Model.Description" class="form-control" />
+
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" type="tel" value="@Model.Phone" class="form-control" />
+
+        <label asp-for="ImageURL">Your Photo</label>
+        @if (!string.IsNullOrEmpty(Model.ImageURL))
+        {
+            <img src="@Model.ImageURL" alt="Current Photo" class="img-fluid" />
+        }
+        else
+        {
+            <p>No Image</p>
+        }
+
+        <label asp-for="ImageURL">Upload New Photo</label>
+        <input asp-for="ImageURL" type="file" class="form-control" />
+        <span asp-validation-for="ImageURL" class="text-danger"></span>
+
+        <input asp-for="Id" hidden />
+        <input asp-for="AppUser" value="@User.Identity.Name" hidden />
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <button type="submit" class="form-control"> Edit </button>
+    </form>
+}
+

@@ -19,9 +19,10 @@ namespace MyBlogBLL.Services.Concrete
             this.unitOfWork = unitOfWork;   
         }
 
-        public Task AddPortfolioAsync(Portfolio entity)
+        public async Task CreatePortfolioAsync(Portfolio entity)
         {
-            throw new NotImplementedException();
+            await unitOfWork.portfolioRepository.AddAsync(entity);
+            await unitOfWork.CommitAsync();
         }
 
         public Task AddRangePortfolioAsync(IEnumerable<Portfolio> entities)
@@ -49,9 +50,19 @@ namespace MyBlogBLL.Services.Concrete
             return await unitOfWork.portfolioRepository.GetAllAsync();
         }
 
-        public ValueTask<Portfolio> GetPortfolioByIdASync(int id)
+        public async ValueTask<Portfolio> GetPortfolioByIdASync(int id)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.portfolioRepository.GetByIdASync(id);
+        }
+
+        public async Task<Portfolio> GetPortfolioForUserByIdAsync(int id, AppUser user)
+        {
+            return await unitOfWork.portfolioRepository.GetPortfolioByIdIncludeUserAsync(id, user);
+        }
+
+        public async Task<IEnumerable<Portfolio>> GetPortfoliosForUserAsync(AppUser user)
+        {
+            return await unitOfWork.portfolioRepository.GetUserPortfoliosByUser(user);
         }
 
         public Task<IEnumerable<Portfolio>> GetWhereListAsync(Expression<Func<Portfolio, bool>> expression)
@@ -65,6 +76,22 @@ namespace MyBlogBLL.Services.Concrete
         }
 
         public Task UpdatePortfolioAsync(Portfolio UpdatedPortfolio, int PortfolioToBeUpdated)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> AddPortfolioForUserByEntitiesAsync(Portfolio portfolio, AppUser user)
+        {
+
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdatePortfolioForUserByEntitiesAsync(Portfolio portfolioToBeUpdated, AppUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> RemovePortfolioFromUserListByEntitiesAsync(Portfolio portfolioToBeRemoved, AppUser user)
         {
             throw new NotImplementedException();
         }

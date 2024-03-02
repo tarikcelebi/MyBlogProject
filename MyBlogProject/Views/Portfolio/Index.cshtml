@@ -1,0 +1,78 @@
+﻿@using MyBlogDomain.Entities
+@model List<Portfolio>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h3>Portfolios</h3>
+<div class="card-body px-0 pt-0 pb-2">
+    <a href="@Url.Action("AddPortfolio","Portfolio")" class="btn btn-secondary">Add New Project</a>
+</div>
+<div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center justify-content-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Project Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Project Link</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Image 1</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Image 2</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Delete</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Edit</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <p class="text-sm font-weight-bold mb-0">@item.Name</p>
+                            </td>
+                            <td>
+                                <a src="@item.ProjectUrl" class="text-sm font-weight-bold mb-0">@item.ProjectUrl</a>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImageURL))
+                                {
+                                    <img src="@item.ImageURL" alt="Profile Picture" class="img-fluid" />
+                                }
+                                else
+                                {
+                                    <p>No Image</p>
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImageURL2))
+                                {
+                                    <img src="@item.ImageURL2" alt="Profile Picture" class="img-fluid" />
+                                }
+                                else
+                                {
+                                    <p>No Image</p>
+                                }
+                            </td>
+
+                            <td class="align-middle">
+                                <a href="@Url.Action("DeletePortfolio","Portfolio",new {portfolioId=item.Id })" class="btn btn-danger">Delete</a>
+                            </td>
+                            <td class="align-middle">
+                                <a href="@Url.Action("EditPortfolio","Portfolio",new {portfolioId=item.Id})" class="btn btn-secondary">Edit</a>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            }
+            <p class="text-sm font-weight-bold mb-0">Please add your portfolios</p>
+        </table>
+
+    </div>
+</div>
+
+
+
+

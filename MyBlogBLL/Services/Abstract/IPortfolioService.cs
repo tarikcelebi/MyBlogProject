@@ -12,7 +12,7 @@ namespace MyBlogBLL.Services.Abstract
     public interface IPortfolioService 
     {
         ValueTask<Portfolio> GetPortfolioByIdASync(int id);
-        Task AddPortfolioAsync(Portfolio entity);
+        Task CreatePortfolioAsync(Portfolio entity);
         Task UpdatePortfolioAsync(Portfolio UpdatedPortfolio,int PortfolioToBeUpdated);
         void DeletePortfolio(Portfolio entity);
         void DeletePortfolioRange(IEnumerable<Portfolio> entities);
@@ -21,6 +21,11 @@ namespace MyBlogBLL.Services.Abstract
         Task<IEnumerable<Portfolio>> GetAllAsync();
         Task<Portfolio> SingleorDefault(Expression<Func<Portfolio, bool>> expression);
         Task<IEnumerable<Portfolio>> GetWhereListAsync(Expression<Func<Portfolio, bool>> expression);
+        Task<Portfolio> GetPortfolioForUserByIdAsync(int id, AppUser user);
+        Task<IEnumerable<Portfolio>> GetPortfoliosForUserAsync(AppUser user);
+        Task<bool> AddPortfolioForUserByEntitiesAsync(Portfolio portfolio, AppUser user);
+        Task<bool> UpdatePortfolioForUserByEntitiesAsync(Portfolio portfolioToBeUpdated, AppUser user);
+        Task<bool> RemovePortfolioFromUserListByEntitiesAsync(Portfolio portfolioToBeRemoved, AppUser user);
 
 
     }

@@ -9,6 +9,7 @@ namespace MyBlogDAL.Repositories.Abstract
 {
     public interface IPortfolioRepository : IRepository<Portfolio>
     {
-
+        Task<Portfolio> GetPortfolioByIdIncludeUserAsync(int id, AppUser appUser);
+        Task<IEnumerable<Portfolio>> GetUserPortfoliosByUser(AppUser user);
     }
 }

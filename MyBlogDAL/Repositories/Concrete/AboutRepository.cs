@@ -20,9 +20,10 @@ namespace MyBlogDAL.Repositories.Concrete
 
         }
 
-        public async Task<IEnumerable<About>> GetUserAboutsByUser(AppUser user)
+        public async Task<About> GetUserAboutByUser(AppUser user,About about)
         {
-            return await Context.Abouts.Where(x => x.AppUserID == user.Id).ToListAsync();
+            return await Context.Abouts.Include(u => u.AppUser)
+                .FirstOrDefaultAsync(a => a==about && a.AppUser == user);
         }
     }
 }

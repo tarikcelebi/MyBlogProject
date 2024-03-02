@@ -8,6 +8,10 @@ namespace MyBlogDomain.Entities
         public AppUser()
         {
             Skills = new List<Skill>();
+            Abouts = new List<About>();
+            Experiences = new List<Experience>();
+            Portfolios = new List<Portfolio>();
+            Educations = new List<Education>();
         }
         [Required]
         public string FirstName { get; set; }
@@ -24,5 +28,10 @@ namespace MyBlogDomain.Entities
         public List<Skill>? Skills { get; set; }
         public List<About>? Abouts { get; set; }
         public List<Article>? Articles { get; set; }
+
+        public override string ToString()
+        {
+            return UserName.ToString();
+        }
     }
 }
