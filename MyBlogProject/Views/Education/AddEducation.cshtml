@@ -1,0 +1,24 @@
+﻿@using MyBlogDomain.Entities
+@model Education
+@{
+    ViewData["Title"] = "AddEducation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Add ducation</h4>
+<form class="form-control" method="post">
+    <label asp-for="SchoolName">School Name</label>
+    <input type="text" asp-for="SchoolName" class="form-control" />
+    <label asp-for="Department"></label>
+    <input asp-for="Department" type="text" class="form-control" />
+    <label asp-for="Degree"></label>
+    <input asp-for="Degree" type="text" class="form-control" />
+    <label asp-for="StartedDate"></label>
+    <input asp-for="StartedDate" type="date" class="form-control" />
+    <label asp-for="EndedDate"></label>
+    <input asp-for="EndedDate" type="date" class="form-control" />
+    <label asp-for="Clubs"></label>
+    <input asp-for="Clubs" type="text" class="form-control" />
+    <button type="submit" class="form-control">Add</button>
+</form>
+

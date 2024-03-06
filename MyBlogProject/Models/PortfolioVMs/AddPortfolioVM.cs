@@ -6,13 +6,12 @@ namespace MyBlogProject.Models.PortfolioVMs
     {
         [Required]
         public string Name { get; set; }
-        [Required]
-        public string ImageURL { get; set; }
+
         [Required]
         public string ProjectUrl { get; set; }
+        [Required]
         public IFormFile ProjectPic { get; set; }
         public IFormFile ProjectPic2 { get; set; }
-        public string ImageURL2 { get; set; }
         public string AppUserId { get; set; }
     }
 }

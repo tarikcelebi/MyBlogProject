@@ -10,6 +10,8 @@ namespace MyBlogDAL.Repositories.Abstract
     public interface IAboutRepository : IRepository<About>
     {
         Task<About> GetUserAboutByUser(AppUser user,About About);
+        Task<About> GetUserAboutByOnlyUser(AppUser user);
+        Task<IEnumerable<About>> GetUserAboutsByUser(AppUser user);
 
 
     }

@@ -75,25 +75,47 @@ namespace MyBlogBLL.Services.Concrete
             throw new NotImplementedException();
         }
 
-        public Task UpdatePortfolioAsync(Portfolio UpdatedPortfolio, int PortfolioToBeUpdated)
+        public async Task UpdatePortfolioForUserAsync(Portfolio UpdatedPortfolio, int PortfolioToBeUpdated)
         {
-            throw new NotImplementedException();
+            Portfolio NewPortfolio = await unitOfWork.portfolioRepository.GetByIdASync(PortfolioToBeUpdated);
+            NewPortfolio.Name = UpdatedPortfolio.Name;
+            NewPortfolio.ProjectUrl = UpdatedPortfolio.ProjectUrl;
+            NewPortfolio.ImageURL = UpdatedPortfolio.ImageURL;
+            NewPortfolio.ImageURL2 = UpdatedPortfolio.ImageURL2;
+            NewPortfolio.AppUser = UpdatedPortfolio.AppUser;
+            await unitOfWork.CommitAsync();
         }
 
         public async Task<bool> AddPortfolioForUserByEntitiesAsync(Portfolio portfolio, AppUser user)
         {
-
-            throw new NotImplementedException();
+            //portfolio.AppUser.Id = user.Id;
+            await CreatePortfolioAsync(portfolio);
+            if (await unitOfWork.CommitAsync() > 0)
+                return true;
+            return false;
+            
         }
 
-        public Task<bool> UpdatePortfolioForUserByEntitiesAsync(Portfolio portfolioToBeUpdated, AppUser user)
+        public async Task<bool> UpdatePortfolioForUserAsync(Portfolio portfolioToBeUpdated, AppUser user)
         {
-            throw new NotImplementedException();
+            Portfolio NewPortfolio = await unitOfWork.portfolioRepository.GetByIdASync(portfolioToBeUpdated.Id);
+            NewPortfolio.Name = portfolioToBeUpdated.Name;
+            NewPortfolio.ProjectUrl = portfolioToBeUpdated.ProjectUrl;
+            NewPortfolio.ImageURL = portfolioToBeUpdated.ImageURL;
+            NewPortfolio.ImageURL2 = portfolioToBeUpdated.ImageURL2;
+            NewPortfolio.AppUser = portfolioToBeUpdated.AppUser;
+            if (await unitOfWork.CommitAsync() > 0)
+                return true;
+            return false;
         }
 
-        public Task<bool> RemovePortfolioFromUserListByEntitiesAsync(Portfolio portfolioToBeRemoved, AppUser user)
+        public async Task<bool> RemovePortfolioFromUserListByEntitiesAsync(Portfolio portfolioToBeRemoved, AppUser user)
         {
-            throw new NotImplementedException();
+            Portfolio portfolio = await unitOfWork.portfolioRepository.GetPortfolioByIdIncludeUserAsync(portfolioToBeRemoved.Id, user);
+            portfolio.AppUser.Portfolios.Remove(portfolioToBeRemoved);
+            if (await unitOfWork.CommitAsync() > 0)
+                return true;
+            return false;
         }
     }
 }

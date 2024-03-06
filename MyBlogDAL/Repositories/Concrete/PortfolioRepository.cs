@@ -21,8 +21,8 @@ namespace MyBlogDAL.Repositories.Concrete
 
         public async Task<Portfolio> GetPortfolioByIdIncludeUserAsync(int id, AppUser appUser)
         {
-            return await Context.Portfolios.Include(u => appUser)
-                .FirstOrDefaultAsync(p => p.Id == id);
+            return await Context.Portfolios.Include(u => u.AppUser)
+                .FirstOrDefaultAsync(p => p.Id == id && p.AppUserID == appUser.Id);
         }
 
         public async Task<IEnumerable<Portfolio>> GetUserPortfoliosByUser(AppUser user)

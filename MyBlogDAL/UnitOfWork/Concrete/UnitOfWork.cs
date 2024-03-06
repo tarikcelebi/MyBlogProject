@@ -22,6 +22,7 @@ namespace MyBlogDAL.UnitOfWork.Concrete
         private ExperienceRepository ExperienceRepository;
         private PortfolioRepository PortfolioRepository;
         private SkillRepository SkillRepository;
+        private EducationRepository educationRepository;
 
 
         public UnitOfWork(MyBlogDbContext myBlogDbContext)
@@ -29,7 +30,7 @@ namespace MyBlogDAL.UnitOfWork.Concrete
             _context = myBlogDbContext;
         }
 
-
+        public EducationRepository EducationRepository => educationRepository ?? new EducationRepository(_context);
 
         PortfolioRepository IUnitOfWork.portfolioRepository => PortfolioRepository ?? new PortfolioRepository(_context);
 

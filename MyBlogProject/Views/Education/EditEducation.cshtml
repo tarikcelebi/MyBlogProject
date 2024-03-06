@@ -1,0 +1,25 @@
+﻿@using MyBlogDomain.Entities
+@model Education
+@{
+    ViewData["Title"] = "EditEducation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Edit Education</h4>
+<form class="form-control" method="post">
+    <input asp-for="Id" value="@Model.Id" hidden />
+    <label asp-for="SchoolName">Company Name</label>
+    <input type="text" asp-for="SchoolName" value="@Model.SchoolName" class="form-control" />
+    <label asp-for="Department"></label>
+    <input asp-for="Department" type="text" value="@Model.Department" class="form-control" />
+    <label asp-for="Degree"></label>
+    <input asp-for="Degree" type="text" value="@Model.Degree" class="form-control" />
+    <label asp-for="StartedDate"></label>
+    <input asp-for="StartedDate" type="date" value="@Model.StartedDate" class="form-control" />
+    <label asp-for="EndedDate"></label>
+    <input asp-for="EndedDate" type="date" value="@Model.EndedDate" class="form-control" />
+    <label asp-for="Clubs"></label>
+    <input asp-for="Clubs" type="text" value="@Model.Clubs" class="form-control" />
+    <button type="submit" class="form-control"> Edit</button>
+</form>
+

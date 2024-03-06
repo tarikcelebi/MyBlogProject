@@ -13,7 +13,7 @@ namespace MyBlogBLL.Services.Abstract
     {
         ValueTask<Portfolio> GetPortfolioByIdASync(int id);
         Task CreatePortfolioAsync(Portfolio entity);
-        Task UpdatePortfolioAsync(Portfolio UpdatedPortfolio,int PortfolioToBeUpdated);
+        Task UpdatePortfolioForUserAsync(Portfolio UpdatedPortfolio,int PortfolioToBeUpdated);
         void DeletePortfolio(Portfolio entity);
         void DeletePortfolioRange(IEnumerable<Portfolio> entities);
         Task AddRangePortfolioAsync(IEnumerable<Portfolio> entities);
@@ -24,8 +24,8 @@ namespace MyBlogBLL.Services.Abstract
         Task<Portfolio> GetPortfolioForUserByIdAsync(int id, AppUser user);
         Task<IEnumerable<Portfolio>> GetPortfoliosForUserAsync(AppUser user);
         Task<bool> AddPortfolioForUserByEntitiesAsync(Portfolio portfolio, AppUser user);
-        Task<bool> UpdatePortfolioForUserByEntitiesAsync(Portfolio portfolioToBeUpdated, AppUser user);
-        Task<bool> RemovePortfolioFromUserListByEntitiesAsync(Portfolio portfolioToBeRemoved, AppUser user);
+        Task<bool> UpdatePortfolioForUserAsync(Portfolio portfolioToBeUpdated, AppUser user);
+        Task<bool> RemovePortfolioFromUserListByEntitiesAsync(Portfolio portfolioToBeRemoved,AppUser user);
 
 
     }

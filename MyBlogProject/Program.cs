@@ -29,8 +29,9 @@ builder.Services.AddScoped<IAboutService, AboutService>();
 builder.Services.AddScoped<ISkillService, SkillService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 builder.Services.AddScoped<IExperienceService, ExperienceService>();
+builder.Services.AddScoped<IEducationService, EducationService>();
 
-
+builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 builder.Services.AddScoped<IAboutRepository, AboutRepository>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();

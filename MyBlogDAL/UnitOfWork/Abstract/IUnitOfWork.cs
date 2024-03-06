@@ -24,6 +24,7 @@ namespace MyBlogDAL.UnitOfWork.Abstract
         LabelRepository labelRepository { get; }
         AboutRepository aboutRepository { get; }
         ExperienceRepository experienceRepository { get; }
+        EducationRepository EducationRepository { get; }
         Task<int> CommitAsync();
         void Dispose();
 

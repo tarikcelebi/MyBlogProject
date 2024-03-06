@@ -1,0 +1,69 @@
+﻿@using MyBlogDomain.Entities
+@model List<Education>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Your Education Summaries</h4>
+<div class="card-body px-0 pt-0 pb-2">
+    <a href="@Url.Action("AddEducation","Education")" class="btn btn-secondary">Add New Education Summary</a>
+</div>
+<div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center justify-content-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">School Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Department</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Degree</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Started Date</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Ended Date</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Delete</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Edit</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <p class="text-sm font-weight-bold mb-0">@item.SchoolName</p>
+                            </td>
+                            <td>
+                                <p class="text-sm font-weight-bold mb-0">@item.Department</p>
+                            </td>
+                            <td>
+                                <p class="text-sm font-weight-bold mb-0">@item.Degree</p>
+                            </td>
+                            <td>
+                                <p class="text-sm font-weight-bold mb-0">@item.StartedDate</p>
+                            </td>
+                            <td>
+                                <p class="text-sm font-weight-bold mb-0">@item.EndedDate</p>
+                            </td>
+                            <td>
+                                <p class="text-sm font-weight-bold mb-0">@item.Clubs</p>
+                            </td>
+                            <td class="align-middle">
+                                <a href="@Url.Action("RemoveEducation","Education",new {educationId=item.Id })" class="btn btn-danger">Delete</a>
+                            </td>
+                            <td class="align-middle">
+                                <a href="@Url.Action("EditEducation","Education",new {educationId=item.Id})" class="btn btn-secondary">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+            <p class="text-sm font-weight-bold mb-0">Please add your portfolios</p>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+

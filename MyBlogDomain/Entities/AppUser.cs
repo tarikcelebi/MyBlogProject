@@ -12,6 +12,7 @@ namespace MyBlogDomain.Entities
             Experiences = new List<Experience>();
             Portfolios = new List<Portfolio>();
             Educations = new List<Education>();
+            Abouts = new List<About>();
         }
         [Required]
         public string FirstName { get; set; }

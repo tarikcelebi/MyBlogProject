@@ -58,6 +58,11 @@ namespace MyBlogBLL.Services.Concrete
             return await unitOfWork.aboutRepository.GetAllAsync();
         }
 
+        public async Task<IEnumerable<About>> GetAboutWithOutuser()
+        {
+            return await unitOfWork.aboutRepository.GetWhereListAsync(a => a.AppUser == null);
+        }
+
         public async Task<About> GetUserAboutByUser(AppUser user)
         {
             return await unitOfWork.aboutRepository.SingleorDefault(a => a.AppUserID == user.Id);
@@ -65,7 +70,7 @@ namespace MyBlogBLL.Services.Concrete
 
         public async Task<IEnumerable<About>> GetUserAboutsByUser(AppUser user)
         {
-            return await unitOfWork.aboutRepository.GetWhereListAsync(x => x.AppUserID == user.Id);
+            return await unitOfWork.aboutRepository.GetWhereListAsync(a => a.AppUserID == user.Id);
         }
 
         public async Task<bool> RemoveAboutForUser(About about, AppUser appUser)
