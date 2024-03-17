@@ -68,7 +68,7 @@ namespace MyBlogProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
+
         [AllowAnonymous]
         public IActionResult SignUp()
         {

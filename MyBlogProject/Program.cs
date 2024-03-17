@@ -46,6 +46,15 @@ builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
  
  */
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Set expiration time as needed
+    options.LoginPath = "/Account/Login"; // Set the login path
+    options.AccessDeniedPath = "/Account/AccessDenied"; // Set the access denied path
+    options.SlidingExpiration = true;
+});
+
 var app = builder.Build();
 
 

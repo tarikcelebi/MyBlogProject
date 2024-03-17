@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyBlogBLL.Services.Abstract;
 
 namespace MyBlogProject.ViewComponents
 {
+    [Authorize]
     public class ExperienceList : ViewComponent
     {
 

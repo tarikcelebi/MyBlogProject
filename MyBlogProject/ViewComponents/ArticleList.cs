@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyBlogBLL.Services.Abstract;
 
 namespace MyBlogProject.ViewComponents
 {
-	public class ArticleList : ViewComponent
+    [Authorize]
+    public class ArticleList : ViewComponent
 	{
 		private readonly IArticleService articleService;
         public ArticleList(IArticleService articleService)

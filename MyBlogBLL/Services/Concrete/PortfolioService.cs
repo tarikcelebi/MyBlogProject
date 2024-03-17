@@ -65,9 +65,9 @@ namespace MyBlogBLL.Services.Concrete
             return await unitOfWork.portfolioRepository.GetUserPortfoliosByUser(user);
         }
 
-        public Task<IEnumerable<Portfolio>> GetWhereListAsync(Expression<Func<Portfolio, bool>> expression)
+        public async Task<IEnumerable<Portfolio>> GetWhereListAsync(Expression<Func<Portfolio, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.portfolioRepository.GetWhereListAsync(expression);
         }
 
         public Task<Portfolio> SingleorDefault(Expression<Func<Portfolio, bool>> expression)

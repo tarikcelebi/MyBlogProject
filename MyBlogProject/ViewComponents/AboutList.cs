@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace MyBlogProject.ViewComponents
 {
-    [Authorize(Roles ="StandartUser")]
+    [Authorize]
     public class AboutList : ViewComponent
     {
         private readonly IAboutService aboutService;

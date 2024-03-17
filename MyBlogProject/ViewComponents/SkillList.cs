@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlogBLL.Services.Abstract;
+using MyBlogBLL.Services.Concrete;
 using MyBlogDomain.Entities;
 
 namespace MyBlogProject.ViewComponents
 {
-    [AllowAnonymous]
+    [Authorize]
     public class SkillList : ViewComponent
     {
         private readonly ISkillService skillService;
@@ -20,10 +21,14 @@ namespace MyBlogProject.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            AppUser user = await userManager.FindByNameAsync(User.Identity.Name);
-            var values = await skillService.GetUserSkillsByUser(user);
+            if (User.Identity.IsAuthenticated)
+            {
 
-            return View(values);
+                var currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+                return View(await skillService.GetUserSkillsByUser(currentUser));
+
+            }
+            return View(await skillService.GetSkills());
         }
     }
 }

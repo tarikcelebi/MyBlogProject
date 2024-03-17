@@ -4,25 +4,31 @@ using MyBlogBLL.Services.Concrete;
 
 namespace MyBlogProject.Controllers
 {
-    [AllowAnonymous]
+    
     public class DefaultController : Controller
     {
-        [AllowAnonymous]
+        
         public IActionResult Index()
         {
             return View();
         }
-        [AllowAnonymous]
+        
         public PartialViewResult HeaderPartial()
         {
             return PartialView();
         }
-        [AllowAnonymous]
+        
         public PartialViewResult NavBarPartial()
         {
             return PartialView();
         }
-        [AllowAnonymous]
+
+        [HttpGet]
+        public PartialViewResult PopUpPartial()
+        {
+            return PartialView();
+        }
+
         public PartialViewResult FeaturePartial()
         {
             return PartialView("~/Views/Feature/FeaturePartial.cshtml");

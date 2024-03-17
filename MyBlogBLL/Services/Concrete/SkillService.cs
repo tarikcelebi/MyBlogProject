@@ -105,5 +105,10 @@ namespace MyBlogBLL.Services.Concrete
                 return true;
             return false;
         }
+
+        public async Task<IEnumerable<Skill>> getwherelist()
+        {
+            return await unitOfWork.skillRepository.GetWhereListAsync(s => s.AppUsers == null);
+        }
     }
 }

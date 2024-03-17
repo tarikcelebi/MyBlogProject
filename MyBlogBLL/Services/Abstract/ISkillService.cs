@@ -20,6 +20,7 @@ namespace MyBlogBLL.Services.Abstract
         Task<Skill> GetSkillByName(string Name);
         Task<bool> AddingSkillForUser(AppUser user, Skill skill);
         Task<IEnumerable<Skill>> GetUserSkillsByUser(AppUser user);
+        Task<IEnumerable<Skill>> getwherelist();
 
     }
 }

@@ -8,7 +8,7 @@ using MyBlogProject.Models.AboutVMs;
 
 namespace MyBlogProject.ViewComponents
 {
-    [AllowAnonymous]
+    [Authorize]
     public class FeatureList : ViewComponent
     {
         private readonly IAboutService aboutService;
