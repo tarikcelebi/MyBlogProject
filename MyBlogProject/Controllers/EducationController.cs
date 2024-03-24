@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlogBLL.Services.Abstract;
 using MyBlogDomain.Entities;
 
 namespace MyBlogProject.Controllers
 {
+    [Authorize]
     public class EducationController : Controller
     {
         private readonly IEducationService educationService;

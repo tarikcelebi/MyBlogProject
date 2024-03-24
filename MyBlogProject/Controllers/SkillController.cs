@@ -8,7 +8,7 @@ using System.Data;
 
 namespace MyBlogProject.Controllers
 {
-    [Authorize(Roles = "StandartUser")]
+    [Authorize]
     public class SkillController : Controller
     {
         private readonly ISkillService skillService;

@@ -55,6 +55,19 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin", builder =>
+    {
+        builder.AllowAnyOrigin() // İzin verilen origin (köken) adresleri
+            .AllowAnyHeader()
+            .AllowCredentials()// Tüm başlıkları (headers) kabul et
+            .AllowAnyMethod(); // Tüm HTTP metodlarını kabul et
+    });
+});
+
+
 var app = builder.Build();
 
 
@@ -74,6 +87,7 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+app.UseCors("AllowOrigin");
 
 app.MapControllerRoute(
     name: "default",

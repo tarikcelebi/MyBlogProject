@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MyBlogDomain.Entities;
+using MyBlogDomain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

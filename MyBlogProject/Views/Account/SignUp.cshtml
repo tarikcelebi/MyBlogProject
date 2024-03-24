@@ -71,7 +71,7 @@
                             <input asp-for="LastName" placeholder="Last Name" class="form-control" />
                         </div>
                         <div class="mb-3">
-                            <label>Your Last Name</label>
+                            <label>Your Age</label>
                             <span asp-validation-for="Age" class="text-danger"></span>
                             <input asp-for="Age" placeholder="Age" class="form-control" />
                         </div>
@@ -90,16 +90,17 @@
                             <span asp-validation-for="CheckPassword" class="text-danger"></span>
                             <input asp-for="CheckPassword" placeholder="Password check" class="form-control" />
                         </div>
+
+
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                        </div>
                         <div class="mb-3">
                             <div class="text-danger" asp-validation-summary="All">
                             </div>
                         </div>
 
-                        <div class="text-center">
-                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
-                        </div>
-
-                        <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;" class="text-dark font-weight-bolder">Sign in</a></p>
+                        <p class="text-sm mt-3 mb-0">Already have an account? <a href="@Url.Action("Login","Account")" class="text-dark font-weight-bolder">Sign in</a></p>
                     </form>
                 </div>
             </div>

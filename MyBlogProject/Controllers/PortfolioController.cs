@@ -8,7 +8,7 @@ using MyBlogProject.Models.PortfolioVMs;
 
 namespace MyBlogProject.Controllers
 {
-    [Authorize(Roles = "StandartUser")]
+    [Authorize]
     public class PortfolioController : Controller
     {
         private readonly UserManager<AppUser> userManager;
@@ -57,8 +57,6 @@ namespace MyBlogProject.Controllers
                 {
                     portfolioVmToBeAdded.ProjectPic2.CopyTo(stream);
                 }
-
-                NewPortfolio.ImageURL2 = $"/UserImages/{portfolioVmToBeAdded.ProjectPic2.FileName}";
 
 
                 if (await portfolioService.AddPortfolioForUserByEntitiesAsync(NewPortfolio, await userManager.FindByIdAsync(portfolioVmToBeAdded.AppUserId)))

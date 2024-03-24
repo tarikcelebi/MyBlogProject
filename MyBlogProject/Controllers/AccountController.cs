@@ -65,7 +65,7 @@ namespace MyBlogProject.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Default");
         }
 
 
@@ -89,7 +89,11 @@ namespace MyBlogProject.Controllers
 
 
             //newUser.ImageURL = user.ImageURL;
-
+            if (user.Password == null || user.CheckPassword == null)
+            {
+                ModelState.AddModelError(" ", "parola boş olamaz");
+                return RedirectToAction("SignUp");
+            }
             if (user.Password == user.CheckPassword)
             {
                 IdentityResult result = await userManager.CreateAsync(newUser, user.Password);
@@ -105,9 +109,6 @@ namespace MyBlogProject.Controllers
 
             }
             return View();
-
-
-
 
         }
 

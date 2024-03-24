@@ -1,71 +1,89 @@
 ﻿@using MyBlogDomain.Entities
 @model List<Portfolio>
 
+
 <section id="portfolio" class="portfolio">
-    <div class="portfolio-details">
-        <div class="section-heading text-center">
-            <h2>portfolio</h2>
+    <!-- Your existing content goes here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="section-heading text-center">
+                        <h2>Porjects</h2>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center justify-content-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project Name</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Go to Project</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr style="background-color:HighlightText">
+                                            <td>
+                                                <div class="d-flex px-2">
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 text-sm">@item.Name</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <a href="@item.ProjectUrl" target="_blank" class="text-decoration-none">
+                                                    <i class="fa fa-github" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <span class="text-xs font-weight-bold">@item.Status</span>
+                                            </td>
+                                            @if (item.Status == MyBlogDomain.Enums.Status.Working)
+                                            {
+                                                <td class="align-middle text-center">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <span class="me-2 text-xs font-weight-bold">%80</span>
+                                                        <div>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                            }
+                                            else
+                                            {
+                                                <td class="align-middle text-center">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <span class="me-2 text-xs font-weight-bold">%100</span>
+                                                        <div>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            }
+
+                                            <td class="align-middle">
+                                                <button class="btn btn-link text-secondary mb-0">
+                                                    <i class="fa fa-ellipsis-v text-xs"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container">
-            <div class="portfolio-content">
-                <div class="isotope">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            @foreach (var item in Model)
-                            {
-                                <div class="item">
-                                    <img src="~/@item.ImageURL" alt="portfolio image" />
-                                    <div class="isotope-overlay">
-                                        <a href="@item.ProjectUrl">
-                                            @item.Name
-                                        </a>
-                                    </div><!-- /.isotope-overlay -->
-                                </div>
-                            }
-                            <!-- /.item -->
-                            @* <div class="item">
-                            <img src="~/Template/assets/images/portfolio/p2.jpg" alt="portfolio image" />
-                            <div class="isotope-overlay">
-                            <a href="#">
-                            ui/ux design
-                            </a>
-                            </div><!-- /.isotope-overlay -->
-                            </div> *@<!-- /.item -->
-                        </div><!-- /.col -->
-                        @*
-                        <div class="col-sm-4">
-                        <div class="item">
-                        <img src="~/Template/assets/images/portfolio/p3.jpg" alt="portfolio image" />
-                        <div class="isotope-overlay">
-                        <a href="#">
-                        web design
-                        </a>
-                        </div><!-- /.isotope-overlay -->
-                        </div><!-- /.item -->
-                        </div><!-- /.col --> *@
-
-                        @* <div class="col-sm-4">
-                        <div class="item">
-                        <img src="~/Template/assets/images/portfolio/p4.jpg" alt="portfolio image" />
-                        <div class="isotope-overlay">
-                        <a href="#">
-                        web development
-                        </a>
-                        </div><!-- /.isotope-overlay -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                        <img src="~/Template/assets/images/portfolio/p5.jpg" alt="portfolio image" />
-                        <div class="isotope-overlay">
-                        <a href="#">
-                        web development
-                        </a>
-                        </div><!-- /.isotope-overlay -->
-                        </div><!-- /.item -->
-                        </div> *@<!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!--/.isotope-->
-            </div><!--/.gallery-content-->
-        </div><!--/.container-->
-    </div><!--/.portfolio-details-->
-
+    </div>
 </section>
+

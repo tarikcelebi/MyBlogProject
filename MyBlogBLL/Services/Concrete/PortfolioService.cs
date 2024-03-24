@@ -81,7 +81,7 @@ namespace MyBlogBLL.Services.Concrete
             NewPortfolio.Name = UpdatedPortfolio.Name;
             NewPortfolio.ProjectUrl = UpdatedPortfolio.ProjectUrl;
             NewPortfolio.ImageURL = UpdatedPortfolio.ImageURL;
-            NewPortfolio.ImageURL2 = UpdatedPortfolio.ImageURL2;
+
             NewPortfolio.AppUser = UpdatedPortfolio.AppUser;
             await unitOfWork.CommitAsync();
         }
@@ -102,7 +102,7 @@ namespace MyBlogBLL.Services.Concrete
             NewPortfolio.Name = portfolioToBeUpdated.Name;
             NewPortfolio.ProjectUrl = portfolioToBeUpdated.ProjectUrl;
             NewPortfolio.ImageURL = portfolioToBeUpdated.ImageURL;
-            NewPortfolio.ImageURL2 = portfolioToBeUpdated.ImageURL2;
+
             NewPortfolio.AppUser = portfolioToBeUpdated.AppUser;
             if (await unitOfWork.CommitAsync() > 0)
                 return true;

@@ -86,9 +86,9 @@ namespace MyBlogBLL.Services.Concrete
             return await unitOfWork.experienceRepository.GetWhereListAsync(x => x.AppUserID==user.Id);
         }
 
-        public Task<IEnumerable<Experience>> GetWhereListAsync(Expression<Func<Experience, bool>> expression)
+        public async Task<IEnumerable<Experience>> GetWhereListAsync(Expression<Func<Experience, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.experienceRepository.GetWhereListAsync(expression);
         }
 
         public async Task<bool> RemoveExperienceForUser(Experience experience, AppUser appUser)

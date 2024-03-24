@@ -48,16 +48,6 @@
                                     <p>No Image</p>
                                 }
                             </td>
-                            <td>
-                                @if (!string.IsNullOrEmpty(item.ImageURL2))
-                                {
-                                    <img src="@item.ImageURL2" alt="Profile Picture" class="img-fluid" />
-                                }
-                                else
-                                {
-                                    <p>No Image</p>
-                                }
-                            </td>
 
                             <td class="align-middle">
                                 <a href="@Url.Action("DeletePortfolio","Portfolio",new {portfolioId=item.Id })" class="btn btn-danger">Delete</a>

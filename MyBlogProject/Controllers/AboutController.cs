@@ -7,7 +7,7 @@ using MyBlogProject.Models.AboutVMs;
 
 namespace MyBlogProject.Controllers
 {
-    [Authorize(Roles = ("StandartUser"))]
+    [Authorize]
     public class AboutController : Controller
     {
         private readonly IAboutService aboutService;

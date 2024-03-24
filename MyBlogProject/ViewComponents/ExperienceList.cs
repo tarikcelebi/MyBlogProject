@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlogBLL.Services.Abstract;
+using MyBlogBLL.Services.Concrete;
+using MyBlogDomain.Entities;
 
 namespace MyBlogProject.ViewComponents
 {
@@ -9,17 +12,24 @@ namespace MyBlogProject.ViewComponents
     {
 
         private readonly IExperienceService experienceService;
+        private readonly UserManager<AppUser> userManager;
 
-        public ExperienceList(IExperienceService experienceService)
+        public ExperienceList(IExperienceService experienceService, UserManager<AppUser> userManager)
         {
             this.experienceService = experienceService;
+            this.userManager = userManager;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var values = await experienceService.GetAllExperienceAsync();
+            if (User.Identity.IsAuthenticated)
+            {
 
-            return View(values);
+                var currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+                return View(await experienceService.GetWhereListAsync(x=>x.AppUser==currentUser));
+
+            }
+            return View(await experienceService.GetWhereListAsync(x=>x.AppUser==null));
         }
     }
 }

@@ -29,7 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\UserImages\" />
+    <Folder Include="wwwroot\ProjectImages\DietApp\" />
+    <Folder Include="wwwroot\ProjectImages\HumanResource\" />
+    <Folder Include="wwwroot\ProjectImages\Otherprojects\" />
   </ItemGroup>
 
 </Project>
