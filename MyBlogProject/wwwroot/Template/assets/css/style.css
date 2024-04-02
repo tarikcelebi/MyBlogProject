@@ -185,15 +185,15 @@ nav.navbar.bootsnav .navbar-toggle i{color: #d92cf9;}
 /*-------------------------------------
         3.  Welcome-hero
 --------------------------------------*/
-.welcome-hero{
+.welcome-hero {
     display: flex;
     align-items: center;
     justify-content: center;
-    position:relative;
-    background:url(../images/about/welcome-banner.jpg)no-repeat;
-    background-size:cover;
+    position: relative;
+    background: url(../images/about/hello-universe-object.jpg)no-repeat;
+    background-size: cover;
     background-position: center;
-    height:890px;
+    height: 890px;
 }
 .welcome-hero:before{
     position:absolute;
@@ -271,13 +271,20 @@ nav.navbar.bootsnav .navbar-toggle i{color: #d92cf9;}
 /*.single-about-txt*/
 
 /*.single-about-img */
-.single-about-img{position: relative;box-shadow: 0 5px 20px rgba(14,25,80,.30);}
+.single-about-img {
+    position: relative;
+    box-shadow: black;
+    width: 100%; /* Ensure the box takes up the entire width */
+    height: 100%; /* Ensure the box takes up the entire height */
+    object-fit: cover;
+    box-shadow: 0 5px 20px rgba(14,25,80,.30);
+}
 .single-about-img:before {
     position:  absolute;
     content: " ";
     top: 0;
     left:  0;
-    width: 109%;
+    width: 100%;
     height:  100%;
     background: rgba(31,44,108,.3);
 }

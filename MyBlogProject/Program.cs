@@ -61,8 +61,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowOrigin", builder =>
     {
         builder.AllowAnyOrigin() // İzin verilen origin (köken) adresleri
-            .AllowAnyHeader()
-            .AllowCredentials()// Tüm başlıkları (headers) kabul et
+            .AllowAnyHeader()// Tüm başlıkları (headers) kabul et
             .AllowAnyMethod(); // Tüm HTTP metodlarını kabul et
     });
 });
